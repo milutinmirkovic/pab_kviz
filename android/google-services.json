@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "153624684587",
+    "project_id": "organizacija-pab-kvizova",
+    "storage_bucket": "organizacija-pab-kvizova.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153624684587:android:51aa8e16727c7b6667226e",
+        "android_client_info": {
+          "package_name": "com.organizacija.pab_kviz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmEVH20wKrwvDUsY_q_vijhBjXciWiB2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
