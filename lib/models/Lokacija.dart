@@ -13,7 +13,7 @@ class Lokacija {
     required this.kapacitet,
   });
 
-  // Factory constructor for creating a new Lokacija instance from a map
+  // Factory konstruktor za kreiranje instance Lokacija iz mape
   factory Lokacija.fromMap(Map<String, dynamic> data, String documentId) {
     return Lokacija(
       id: documentId.isEmpty ? null : documentId,
@@ -23,7 +23,7 @@ class Lokacija {
     );
   }
 
-  // Method for converting a Lokacija instance to a map
+  // Metoda za konvertovanje instance Lokacija u mapu
   Map<String, dynamic> toMap() {
     return {
       'adresa': adresa,
@@ -32,9 +32,9 @@ class Lokacija {
     };
   }
 
-  // Method for converting a Lokacija instance to a JSON string
+  // Metoda za konvertovanje instance Lokacija u JSON string
   String toJson() => json.encode(toMap());
 
-  // Factory constructor for creating a new Lokacija instance from a JSON string
+  // Factory konstruktor za kreiranje instance Lokacija iz JSON stringa
   factory Lokacija.fromJson(String source) => Lokacija.fromMap(json.decode(source), "");
 }

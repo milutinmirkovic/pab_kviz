@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:pab_kviz/models/lokacija.dart';
 
 class LokacijaService {
-  final String baseUrl = 'https://organizacija-pab-kvizova-default-rtdb.europe-west1.firebasedatabase.app/locations';
+  final String baseUrl = 'https://organizacija-pab-kvizova-default-rtdb.europe-west1.firebasedatabase.app/lokacije';
 
   // Method for adding a new Lokacija
   Future<void> addLokacija(Lokacija lokacija) async {
@@ -33,13 +33,11 @@ class LokacijaService {
     print('Response status: ${response.statusCode}');
     print('Response body: ${response.body}');
     if (response.statusCode == 200) {
-      List<dynamic> data = json.decode(response.body);
+      Map<String, dynamic> data = json.decode(response.body);
       print('Decoded data: $data');
-      if (data != null && data.isNotEmpty) {
-        return data
-            .where((entry) => entry != null) // Filter out null entries
-            .map((entry) {
-          return Lokacija.fromMap(entry, "");
+      if (data.isNotEmpty) {
+        return data.entries.map((entry) {
+          return Lokacija.fromMap(entry.value, entry.key);
         }).toList();
       } else {
         return [];
