@@ -1,6 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:pab_kviz/models/Korisnik.dart';
+import 'package:pab_kviz/services/auth.dart';
 import 'package:pab_kviz/wrapper.dart';
+import 'package:provider/provider.dart';
 //import 'pages/login_page.dart';
 
 
@@ -23,8 +26,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Wrapper(),
+    return StreamProvider<Korisnik?>.value(
+      value: AuthService().user,
+      initialData: null,
+      child: MaterialApp(
+        home: Wrapper(),
+      ),
     );
   }
 }
