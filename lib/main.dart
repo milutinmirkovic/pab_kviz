@@ -5,11 +5,18 @@ import 'package:pab_kviz/wrapper.dart';
 
 
 void main() async{
+  try{
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: FirebaseOptions(
+      apiKey: "AIzaSyBmEVH20wKrwvDUsY_q_vijhBjXciWiB2Q",
+      appId: "com.organizacija.pab_kviz",
+      messagingSenderId: "153624684587",
+      projectId: "organizacija-pab-kvizova",),);
   runApp(MyApp());
+  }catch(e){
+    print(e.toString());
+  }
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
