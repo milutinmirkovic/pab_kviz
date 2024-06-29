@@ -1,35 +1,35 @@
-import 'package:pab_kviz/services/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:pab_kviz/services/auth.dart';
 
-class SignIn extends StatefulWidget {
-
-  final Function? toggleView;
-  const SignIn({super.key,required this.toggleView});
+class Register extends StatefulWidget {
+   final Function? toggleView;
+   Register({super.key, required this.toggleView});
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
 
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String error = '';
 
+  // text field state
   String email = '';
   String password = '';
 
- @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.orange[100],
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 187, 178, 178),
         elevation: 0.0,
-        title: Text('PRIJAVITE SE NA SAJT PAB KVIZA'),
+        title: Text('Napravi novi nalog'),
         actions: <Widget>[
           TextButton.icon(
             icon: Icon(Icons.person),
-            label: Text('Napravi nalog'),
+            label: Text('Uloguj se'),
             onPressed: () {
             if (widget.toggleView != null) {
               widget.toggleView!();
@@ -38,7 +38,6 @@ class _SignInState extends State<SignIn> {
           print('toggleView is null');
         }
       },
-            
           ),
         ],
       ),
@@ -57,10 +56,9 @@ class _SignInState extends State<SignIn> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
-                 validator: (val) => val!.length < 6 ? 'Enter a password 6+ chars long' : null,
                 obscureText: true,
+                validator: (val) => val!.length < 6 ? 'Enter a password 6+ chars long' : null,
                 onChanged: (val) {
-                  
                   setState(() => password = val);
                 },
               ),
@@ -72,15 +70,15 @@ class _SignInState extends State<SignIn> {
                     textStyle: WidgetStateProperty.all(
                     TextStyle(color: Colors.white))),
                 child: Text(
-                  'Prijavi se',
+                  'Kreiraj nalog',
                   style: TextStyle(color: Colors.white),
                 ),
                 onPressed: () async {
                   if(_formKey.currentState!.validate()){
-                    dynamic result = await _auth.signInWithEmailAndPassword(email, password);
+                    dynamic result = await _auth.registerWithEmailAndPassword(email, password);
                     if(result == null) {
                       setState(() {
-                        error = 'Could not sign in with those credentials';
+                        error = 'Please supply a valid email';
                       });
                     }
                   }
@@ -90,7 +88,7 @@ class _SignInState extends State<SignIn> {
               Text(
                 error,
                 style: TextStyle(color: Colors.red, fontSize: 14.0),
-              ),
+              )
             ],
           ),
         ),
