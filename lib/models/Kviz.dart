@@ -5,6 +5,7 @@ class Kviz {
   String naziv;
   String tip;
   String vreme;
+  String datum;
   double cenaPoIgracu;
   String lokacijaId;
   int brojSlobodnihMesta;
@@ -15,6 +16,7 @@ class Kviz {
     required this.naziv,
     required this.tip,
     required this.vreme,
+    required this.datum,
     required this.cenaPoIgracu,
     required this.lokacijaId,
     required this.brojSlobodnihMesta,
@@ -28,9 +30,11 @@ class Kviz {
       naziv: data['naziv'],
       tip: data['tip'],
       vreme: data['vreme'],
+      datum: data['datum'],
       cenaPoIgracu: data['cena_po_igracu'],
       lokacijaId: data['lokacija_id'],
-      brojSlobodnihMesta: data['broj_slobodnih_mesta'],
+    brojSlobodnihMesta: data['broj_slobodnih_mesta'],
+    
       ucesca: List<String>.from(data['ucesca'] ?? []),
     );
   }
@@ -41,6 +45,7 @@ class Kviz {
       'naziv': naziv,
       'tip': tip,
       'vreme': vreme,
+      'datum': datum,
       'cena_po_igracu': cenaPoIgracu,
       'lokacija_id': lokacijaId,
       'broj_slobodnih_mesta': brojSlobodnihMesta,

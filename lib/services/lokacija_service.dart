@@ -5,19 +5,23 @@ import 'package:pab_kviz/models/lokacija.dart';
 class LokacijaService {
   final String baseUrl = 'https://organizacija-pab-kvizova-default-rtdb.europe-west1.firebasedatabase.app/lokacije';
 
-  // Method for adding a new Lokacija
+  // Metod za dodavanje nove Lokacije
   Future<void> addLokacija(Lokacija lokacija) async {
     final response = await http.post(
       Uri.parse('$baseUrl.json'),
       body: json.encode(lokacija.toMap()),
     );
-    if (response.statusCode != 200) {
+    if (response.statusCode == 200) {
+      final responseData = json.decode(response.body);
+      lokacija.id = responseData['name']; // Čuvanje ID-a nove lokacije
+    } else {
       throw Exception('Failed to add lokacija');
     }
   }
 
-  // Method for updating an existing Lokacija
+  // Metod za ažuriranje postojeće Lokacije
   Future<void> updateLokacija(Lokacija lokacija) async {
+    if (lokacija.id == null) throw ArgumentError('Lokacija must have an id to be updated.');
     final response = await http.put(
       Uri.parse('$baseUrl/${lokacija.id}.json'),
       body: json.encode(lokacija.toMap()),
@@ -27,14 +31,11 @@ class LokacijaService {
     }
   }
 
-  // Method for fetching all Lokacije
+  // Metod za učitavanje svih Lokacija
   Future<List<Lokacija>> getLocations() async {
     final response = await http.get(Uri.parse('$baseUrl.json'));
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
     if (response.statusCode == 200) {
       Map<String, dynamic> data = json.decode(response.body);
-      print('Decoded data: $data');
       if (data.isNotEmpty) {
         return data.entries.map((entry) {
           return Lokacija.fromMap(entry.value, entry.key);
@@ -47,7 +48,7 @@ class LokacijaService {
     }
   }
 
-  // Method for deleting an existing Lokacija
+  // Metod za brisanje postojeće Lokacije
   Future<void> deleteLokacija(String id) async {
     final response = await http.delete(
       Uri.parse('$baseUrl/$id.json'),
