@@ -13,7 +13,7 @@ class Home extends StatelessWidget {
         centerTitle: true,
         title: Image.asset(
           'assets/logo.png',
-          height: 50, // Adjust the height as needed
+          height: 100, 
         ),
         actions: <Widget>[
           TextButton.icon(
