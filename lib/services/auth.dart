@@ -13,7 +13,8 @@ class AuthService{
   if (user == null) {
     return null;  // Return a default Korisnik object or handle null appropriately
   } else {
-    return Korisnik(uid: user.uid);
+    return Korisnik(user.email, uid: user.uid);
+    //return Korisnik(email: user.email,uid: user.uid);
   }
  }
   //auth change user stream
@@ -41,6 +42,7 @@ Future signInWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       User? user = result.user;
+      print(user!.email);
       return user;
     } catch (error) {
       print(error.toString());

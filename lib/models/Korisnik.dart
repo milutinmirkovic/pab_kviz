@@ -1,7 +1,8 @@
 class Korisnik{
   final String uid;
+  final String? email;
 
-  Korisnik({required this.uid});
+  Korisnik(this.email, {required this.uid});
 
 
 
