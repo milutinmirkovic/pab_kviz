@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pab_kviz/services/kviz_service.dart';
 import 'package:pab_kviz/models/kviz.dart';
+import 'package:pab_kviz/services/auth.dart';
 
 class Home extends StatelessWidget {
   final KvizService kvizService = KvizService();
+
+   final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +23,7 @@ class Home extends StatelessWidget {
             icon: Icon(Icons.person),
             label: Text('Logout'),
             onPressed: () async {
-              // Implement logout
+              await _auth.signOut();
             },
           ),
         ],
