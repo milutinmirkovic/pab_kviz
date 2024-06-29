@@ -13,7 +13,7 @@ class AuthService{
   if (user == null) {
     return null;  // Return a default Korisnik object or handle null appropriately
   } else {
-    return Korisnik(user.email, uid: user.uid);
+    return Korisnik(uid: user.uid, email: user.email, isAdmin: false, password: ''); //privremeno
     //return Korisnik(email: user.email,uid: user.uid);
   }
  }

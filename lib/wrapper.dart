@@ -3,7 +3,7 @@ import 'package:pab_kviz/models/Korisnik.dart';
 import 'package:pab_kviz/pages/authenticate/authenticate.dart';
 import 'package:pab_kviz/pages/home/home.dart';
 import 'package:provider/provider.dart';
-//import 'package:pab_kviz/pages/home/home.dart';
+
 
 class Wrapper extends StatelessWidget {
   const Wrapper({super.key});
@@ -17,7 +17,7 @@ class Wrapper extends StatelessWidget {
     if(user == null){
       return Authenticate();
     }else{
-      return Home();
+      return Home(user: user);
     }
   }
 }
