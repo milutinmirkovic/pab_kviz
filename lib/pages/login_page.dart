@@ -16,7 +16,7 @@ final _formkey = GlobalKey<FormState>();
 Widget build(BuildContext context) { 
 	return Scaffold( 
 	appBar: AppBar( 
-		title: Text('Login'), 
+		title: Text('Dobrodošli! Ulogujte se'), 
 		centerTitle: true, 
 	), 
 	body: SingleChildScrollView( 
