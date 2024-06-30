@@ -5,15 +5,20 @@ import 'package:pab_kviz/models/kviz.dart';
 import 'package:pab_kviz/services/auth.dart';
 
 class Home extends StatelessWidget {
-  final KvizService kvizService = KvizService();
+  
 
    final AuthService _auth = AuthService();
 
    final Korisnik user;
    Home({super.key, required this.user});
+   KvizService kvizService = new KvizService(); 
+   
 
   @override
   Widget build(BuildContext context) {
+    
+    print(user.email);
+    print(user.token);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 255, 153, 0),

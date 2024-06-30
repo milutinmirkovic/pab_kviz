@@ -12,7 +12,7 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final user = Provider.of<Korisnik?>(context);
-    print(user);
+    //print(user);
     //ili home ili auth
     if(user == null){
       return Authenticate();

@@ -1,66 +1,122 @@
 import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pab_kviz/models/Korisnik.dart';
 
+
 class AuthService{
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final String baseUrl = 'https://organizacija-pab-kvizova-default-rtdb.europe-west1.firebasedatabase.app';
 
 
-  //create User based on firebase User
- Korisnik? _userFromFirebaseUser(User? user) {
+  //create Korisnik based on firebase User
+ Korisnik? _userFromFirebaseUser(User? user, {String? token}) {
   if (user == null) {
     return null;  // Return a default Korisnik object or handle null appropriately
   } else {
-    return Korisnik(uid: user.uid, email: user.email, isAdmin: false, password: ''); //privremeno
-    //return Korisnik(email: user.email,uid: user.uid);
+    return Korisnik(email: user.email, isAdmin: false, token: token); //privremeno
+    
   }
  }
   //auth change user stream
-  Stream<Korisnik?> get user {
-    return _auth.authStateChanges()
-    .map((User? user)=>_userFromFirebaseUser(user));
+   Stream<Korisnik?> get user {
+    return _auth.authStateChanges().asyncMap((User? user) async {
+      if (user != null) {
+        // Fetch user data from Firebase Realtime Database
+        try {
+          final token = await user.getIdToken();
+          //print(token);
+          final response = await http.get(
+            Uri.parse('$baseUrl/users/${user.uid}.json?auth=$token'),
+          );
+
+          if (response.statusCode == 200) {
+            final responseData = json.decode(response.body);
+            if (responseData == null) {
+              print('User data not found');
+              return null;
+            }
+            final userData = responseData as Map<String, dynamic>;
+            return Korisnik.fromMap(userData, token!);
+          } else {
+            print('Failed to load user data: ${response.statusCode} ${response.body}');
+            return null;
+          }
+        } catch (e) {
+          print('Error fetching user data: $e');
+          return null;
+        }
+      } else {
+        return null;
+      }
+    });
   }
 
-  //sign in anon
-  Future signInAnon() async {
-    try{
-
-      UserCredential result = await _auth.signInAnonymously();
-      User? user = result.user;
-      return _userFromFirebaseUser(user);
-
-    }catch(e){
-      print(e.toString());
-      return null;
-    }
-  }
   //sign in w/email and password
 
-Future signInWithEmailAndPassword(String email, String password) async {
+  Future<Korisnik?> signInWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       User? user = result.user;
-      print(user!.email);
-      return user;
-    } catch (error) {
-      print(error.toString());
+      if (user != null) {
+        final token = await user.getIdToken();
+        //print(token);
+        //print(token);
+        final response = await http.get(
+          Uri.parse('$baseUrl/users/${user.uid}.json?auth=$token'),
+        );
+
+        if (response.statusCode == 200) {
+          print("sign in/response je vracen");
+          final userData = json.decode(response.body) as Map<String, dynamic>;
+          return Korisnik.fromMap(userData, token!);
+        } else {
+          print('Failed to load user data: ${response.statusCode} ${response.body}');
+          return _userFromFirebaseUser(user);
+        }
+      }
       return null;
-    } 
+    } catch (e) {
+      print('Error in signInWithEmailAndPassword: $e');
+      return null;
+    }
   }
 
   //register w/email and password
 
- Future registerWithEmailAndPassword(String email, String password) async {
+ Future<Korisnik?> registerWithEmailAndPassword(String email, String password) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User? user = result.user;
-      return _userFromFirebaseUser(user);
-    } catch (error) {
-      print(error.toString());
+      if (user != null) {
+        final token = await user.getIdToken();
+        final response = await http.put(
+          Uri.parse('$baseUrl/users/${user.uid}.json?auth=$token'),
+          body: json.encode({
+            'email': email,
+            'password': password,
+            'isAdmin': false,
+          }),
+        );
+
+        if (response.statusCode == 200) {
+          print("register/response je vracen");
+          final userData = json.decode(response.body) as Map<String, dynamic>;
+          
+          return Korisnik.fromMap(userData, token!);
+        } else {
+          print('Failed to save user data: ${response.statusCode} ${response.body}');
+          return _userFromFirebaseUser(user);
+        }
+      }
       return null;
-    } 
+    } catch (e) {
+      print('Error in registerWithEmailAndPassword: $e');
+      return null;
+    }
   }
 
   //sign out
