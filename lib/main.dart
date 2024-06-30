@@ -1,10 +1,11 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:pab_kviz/models/Korisnik.dart';
 import 'package:pab_kviz/services/auth.dart';
 import 'package:pab_kviz/wrapper.dart';
-import 'package:provider/provider.dart';
-//import 'pages/login_page.dart';
+import 'package:pab_kviz/pages/lokacije_page.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,9 +21,6 @@ void main() async {
 
     print("Firebase initialized successfully.");
 
-    // Ispis svih kvizova u konzoli
-  
-
     runApp(MyApp());
   } catch (e) {
     print("Error initializing Firebase: ${e.toString()}");
@@ -37,6 +35,12 @@ class MyApp extends StatelessWidget {
       initialData: null,
       child: MaterialApp(
         home: Wrapper(),
+        routes: {
+          //'/kvizovi': (context) => KvizoviPage(user: Provider.of<Korisnik>(context)!),
+          '/lokacije': (context) => LokacijePage(user: Provider.of<Korisnik>(context)!),
+        //  '/prijava': (context) => PrijavaPage(user: Provider.of<Korisnik>(context)!),
+          // Dodajte ovde ostale rute prema potrebi
+        },
       ),
     );
   }

@@ -5,12 +5,16 @@ class Lokacija {
   String adresa;
   String naziv;
   int kapacitet;
+  String opis;
+  String slika;
 
   Lokacija({
     this.id,
     required this.adresa,
     required this.naziv,
     required this.kapacitet,
+    required this.opis,
+    required this.slika
   });
 
   // Factory konstruktor za kreiranje instance Lokacija iz mape
@@ -20,6 +24,8 @@ class Lokacija {
       adresa: data['adresa'],
       naziv: data['naziv'],
       kapacitet: data['kapacitet'],
+      opis: data['opis'],
+      slika: data['slika']
     );
   }
 
@@ -29,6 +35,8 @@ class Lokacija {
       'adresa': adresa,
       'naziv': naziv,
       'kapacitet': kapacitet,
+      'opis':opis,
+      'slika':slika
     };
   }
 
