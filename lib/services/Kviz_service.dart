@@ -5,8 +5,8 @@ import 'package:pab_kviz/models/kviz.dart';
 
 class KvizService {
   final String baseUrl = 'https://organizacija-pab-kvizova-default-rtdb.europe-west1.firebasedatabase.app/kvizovi';
-  final Korisnik user;
-  KvizService({required this.user});
+  //final Korisnik user;
+  //KvizService({required this.user});
 
   // Metoda za učitavanje svih kvizova
   Future<List<Kviz>> getKvizovi() async {
