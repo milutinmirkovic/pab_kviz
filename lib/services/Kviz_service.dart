@@ -23,4 +23,17 @@ class KvizService {
       throw Exception('Failed to load kvizovi');
     }
   }
+
+ Future<void> addKviz(Kviz kviz, String token) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl.json?auth=$token'),
+      body: kviz.toJson(),
+    );
+    if (response.statusCode != 200) {
+      throw Exception('Failed to add kviz');
+    }
+  }
+
+
+
 }
