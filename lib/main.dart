@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pab_kviz/pages/authenticate/sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pab_kviz/models/Korisnik.dart';
@@ -34,10 +35,10 @@ class MyApp extends StatelessWidget {
       value: AuthService().user,
       initialData: null,
       child: MaterialApp(
-        home: Wrapper(),
+        home: SignIn(),
         routes: {
           //'/kvizovi': (context) => KvizoviPage(user: Provider.of<Korisnik>(context)!),
-          '/lokacije': (context) => LokacijePage(user: Provider.of<Korisnik>(context)!),
+          //'/lokacije': (context) => LokacijePage(user: Provider.of<Korisnik>(context)!),
         //  '/prijava': (context) => PrijavaPage(user: Provider.of<Korisnik>(context)!),
           // Dodajte ovde ostale rute prema potrebi
         },

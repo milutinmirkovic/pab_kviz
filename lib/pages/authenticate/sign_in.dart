@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:pab_kviz/pages/authenticate/register.dart';
+import 'package:pab_kviz/pages/home/home.dart';
 import 'package:pab_kviz/services/auth.dart';
 import 'package:pab_kviz/shared/constants.dart';
 
-class SignIn extends StatefulWidget {
-  final Function? toggleView;
-  const SignIn({Key? key, required this.toggleView}) : super(key: key);
+class   SignIn extends StatefulWidget {
+  //final Function? toggleView;
+  //const SignIn({Key? key, required this.toggleView}) : super(key: key);
 
   @override
   _SignInState createState() => _SignInState();
@@ -25,10 +27,7 @@ class _SignInState extends State<SignIn> {
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/login_background.jpg'), // Background image for login
-                fit: BoxFit.cover,
-              ),
+             
             ),
           ),
           Center(
@@ -98,6 +97,11 @@ class _SignInState extends State<SignIn> {
                               setState(() {
                                 error = 'Neuspešno logovanje';
                               });
+                            }else{
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => Home(user: result)),
+                              );
                             }
                           }
                         },
@@ -109,7 +113,12 @@ class _SignInState extends State<SignIn> {
                       ),
                       SizedBox(height: 20),
                       TextButton(
-                        onPressed: () => widget.toggleView!(),
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => Register()),
+                          );
+                        },
                         child: Text(
                           "Nemate nalog? Napravite ga",
                           style: TextStyle(color: Colors.orange),

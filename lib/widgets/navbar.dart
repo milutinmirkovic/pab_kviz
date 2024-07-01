@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:pab_kviz/pages/authenticate/sign_in.dart';
 import 'package:pab_kviz/services/auth.dart';
 import 'package:pab_kviz/models/Korisnik.dart';
 
 class Navbar extends StatelessWidget implements PreferredSizeWidget {
   final AuthService _auth = AuthService();
   final String title;
-  final Korisnik user;
+  final Korisnik? user;
 
   Navbar({required this.title, required this.user});
 
@@ -28,6 +29,11 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
           label: Text('Logout'),
           onPressed: () async {
             await _auth.signOut();
+            // Navigate to SignIn page
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => SignIn()),
+            );
           },
         ),
       ],

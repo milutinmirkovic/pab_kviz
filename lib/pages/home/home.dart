@@ -17,7 +17,7 @@ class Home extends StatelessWidget {
     print("ss");
     return Scaffold(
       appBar: Navbar(title: 'PAB KVIZ 8x8', user: user),
-      drawer: CustomDrawer(),
+      drawer: CustomDrawer(user: user),
       body: FutureBuilder<List<Kviz>>(
         future: kvizService.getKvizovi(user.token ?? ''),
         builder: (context, snapshot) {

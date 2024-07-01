@@ -11,7 +11,7 @@ import 'package:pab_kviz/models/Korisnik.dart';
 class LokacijePage extends StatelessWidget {
   final LokacijaService lokacijaService = LokacijaService();
   final KvizService kvizService = KvizService();
-  final Korisnik user; // Auth token
+  final Korisnik? user; // Auth token
 
   LokacijePage({required this.user});
 
@@ -19,9 +19,9 @@ class LokacijePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Navbar(title: 'Lokacije', user: user),
-      drawer: CustomDrawer(),
+      drawer: CustomDrawer(user: user),
       body: FutureBuilder<List<Lokacija>>(
-        future: lokacijaService.getLocations(user.token ?? ''),
+        future: lokacijaService.getLocations(user!.token ?? ''),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -34,7 +34,7 @@ class LokacijePage extends StatelessWidget {
             return ListView(
               children: lokacije.map((lokacija) {
                 return FutureBuilder<List<Kviz>>(
-                  future: kvizService.getKvizovi(user.token ?? ''),
+                  future: kvizService.getKvizovi(user!.token ?? ''),
                   builder: (context, kvizSnapshot) {
                     if (kvizSnapshot.connectionState == ConnectionState.waiting) {
                       return Center(child: CircularProgressIndicator());

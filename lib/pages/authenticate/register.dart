@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:form_field_validator/form_field_validator.dart';
+import 'package:pab_kviz/pages/authenticate/sign_in.dart';
 import 'package:pab_kviz/services/auth.dart';
 import 'package:pab_kviz/shared/constants.dart';
 
 class Register extends StatefulWidget {
-  final Function? toggleView;
-  const Register({Key? key, required this.toggleView}) : super(key: key);
+  //final Function? toggleView;
+ // const Register({Key? key, required this.toggleView}) : super(key: key);
 
   @override
   _RegisterState createState() => _RegisterState();
@@ -25,10 +26,7 @@ class _RegisterState extends State<Register> {
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/signup_background.jpg'), // Background image for signup
-                fit: BoxFit.cover,
-              ),
+              
             ),
           ),
           Center(
@@ -93,6 +91,11 @@ class _RegisterState extends State<Register> {
                               setState(() {
                                 error = 'Molimo unesite validan email';
                               });
+                            }else{
+                              Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => SignIn()),
+                          );
                             }
                           }
                         },
@@ -104,7 +107,12 @@ class _RegisterState extends State<Register> {
                       ),
                       SizedBox(height: 20),
                       TextButton(
-                        onPressed: () => widget.toggleView!(),
+                        onPressed: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => SignIn()),
+                          );
+                        },
                         child: Text(
                           'Već imate nalog? Prijavite se',
                           style: TextStyle(color: Colors.orange),
