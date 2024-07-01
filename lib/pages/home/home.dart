@@ -14,6 +14,7 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("ss");
     return Scaffold(
       appBar: Navbar(title: 'PAB KVIZ 8x8', user: user),
       drawer: CustomDrawer(),
