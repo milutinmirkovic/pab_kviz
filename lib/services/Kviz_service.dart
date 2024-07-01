@@ -24,6 +24,19 @@ class KvizService {
     }
   }
 
+ Future<void> addKviz(Kviz kviz, String token) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl.json?auth=$token'),
+      body: kviz.toJson(),
+    );
+    if (response.statusCode != 200) {
+      throw Exception('Failed to add kviz');
+    }
+  }
+
+
+
+
 
    Future<void> updateKviz(String? kvizId, int currentBrojSlobodnihIgraca, String? token) async {
     final url = Uri.parse('$baseUrl/$kvizId.json?=$token');

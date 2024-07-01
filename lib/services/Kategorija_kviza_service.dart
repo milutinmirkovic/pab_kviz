@@ -6,9 +6,9 @@ class KategorijaKvizaService {
   final String baseUrl = 'https://organizacija-pab-kvizova-default-rtdb.europe-west1.firebasedatabase.app/kategorije_kviza';
 
   // Metod za dodavanje nove kategorije kviza
-  Future<void> addKategorija(KategorijaKviza kategorija) async {
+  Future<void> addKategorija(KategorijaKviza kategorija, String token) async {
     final response = await http.post(
-      Uri.parse('$baseUrl.json'),
+      Uri.parse('$baseUrl.json?auth=$token'),
       body: json.encode(kategorija.toMap()),
     );
     if (response.statusCode == 200) {
@@ -20,10 +20,10 @@ class KategorijaKvizaService {
   }
 
   // Metod za ažuriranje postojeće kategorije kviza
-  Future<void> updateKategorija(KategorijaKviza kategorija) async {
+  Future<void> updateKategorija(KategorijaKviza kategorija, String token) async {
     if (kategorija.id == null) throw ArgumentError('Kategorija must have an id to be updated.');
     final response = await http.put(
-      Uri.parse('$baseUrl/${kategorija.id}.json'),
+      Uri.parse('$baseUrl/${kategorija.id}.json?auth=$token'),
       body: json.encode(kategorija.toMap()),
     );
     if (response.statusCode != 200) {
@@ -32,8 +32,8 @@ class KategorijaKvizaService {
   }
 
   // Metod za učitavanje svih kategorija kviza
-  Future<List<KategorijaKviza>> getKategorije() async {
-    final response = await http.get(Uri.parse('$baseUrl.json'));
+  Future<List<KategorijaKviza>> getKategorije(String token) async {
+    final response = await http.get(Uri.parse('$baseUrl.json?auth=$token'));
     if (response.statusCode == 200) {
       Map<String, dynamic> data = json.decode(response.body);
       if (data.isNotEmpty) {
@@ -49,9 +49,9 @@ class KategorijaKvizaService {
   }
 
   // Metod za brisanje postojeće kategorije kviza
-  Future<void> deleteKategorija(String id) async {
+  Future<void> deleteKategorija(String id, String token) async {
     final response = await http.delete(
-      Uri.parse('$baseUrl/$id.json'),
+      Uri.parse('$baseUrl/$id.json?auth=$token'),
     );
     if (response.statusCode != 200) {
       throw Exception('Failed to delete kategorija kviza');

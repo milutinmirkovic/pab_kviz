@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pab_kviz/pages/authenticate/sign_in.dart';
+import 'package:pab_kviz/pages/home/home.dart'; // Importujte vašu početnu stranicu
 import 'package:pab_kviz/services/auth.dart';
 import 'package:pab_kviz/models/Korisnik.dart';
 
@@ -18,7 +19,15 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('assets/logo.png', height: 30),
+          GestureDetector(
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => Home(user: user!)),
+              );
+            },
+            child: Image.asset('assets/logo.png', height: 30),
+          ),
           SizedBox(width: 10),
           Text(title),
         ],
