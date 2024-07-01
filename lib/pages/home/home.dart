@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pab_kviz/pages/prijava.dart';
 import 'package:pab_kviz/services/kviz_service.dart';
 import 'package:pab_kviz/models/kviz.dart';
 import 'package:pab_kviz/widgets/navbar.dart';
@@ -81,7 +82,10 @@ class Home extends StatelessWidget {
                       // Implement update logic here
                     },
                     onRegister: () {
-                      // Implement registration logic here
+                      Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(builder: (context) => PrijavaPage(user: user, kviz: kviz)),
+                              );
                     },
                   ),
               ],

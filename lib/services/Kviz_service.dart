@@ -23,4 +23,28 @@ class KvizService {
       throw Exception('Failed to load kvizovi');
     }
   }
+
+
+   Future<void> updateKviz(String? kvizId, int currentBrojSlobodnihIgraca, String? token) async {
+    final url = Uri.parse('$baseUrl/$kvizId.json?=$token');
+    final updatedBrojSlobodnihIgraca = currentBrojSlobodnihIgraca - 1;
+
+    try {
+      final response = await http.put(
+        url,
+        body: jsonEncode({'broj_slobodnih_mesta': updatedBrojSlobodnihIgraca}),
+      );
+
+      if (response.statusCode == 200) {
+        print('Kviz updated successfully');
+      } else {
+        print('Failed to update kviz. Error: ${response.reasonPhrase}');
+        // Handle error cases
+      }
+    } catch (e) {
+      print('Exception occurred while updating kviz: $e');
+      // Handle exceptions
+    }
+  }
+
 }
