@@ -40,8 +40,19 @@ class Lokacija {
     };
   }
 
+
+  Map<String, dynamic> toJson() {
+    return {
+      'adresa': adresa,
+      'naziv': naziv,
+      'kapacitet': kapacitet,
+      'opis':opis,
+      'slika':slika
+    };
+  }
+
   // Metoda za konvertovanje instance Lokacija u JSON string
-  String toJson() => json.encode(toMap());
+  //String toJson() => json.encode(toMap());
 
   // Factory konstruktor za kreiranje instance Lokacija iz JSON stringa
   factory Lokacija.fromJson(String source) => Lokacija.fromMap(json.decode(source), "");

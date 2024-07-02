@@ -80,8 +80,8 @@ class PrijavaPage extends StatelessWidget {
                         kviz: kviz,
                       );
                       await prijavaService.createPrijava(prijava);
-                      print(kviz!.id);
-                      print(user!.token);
+                     // print(kviz!.id);
+                      //print(user!.token);
                       await kvizService.updateKviz(kviz!.id, kviz!.brojSlobodnihMesta, user!.token);
                       
                       ScaffoldMessenger.of(context).showSnackBar(

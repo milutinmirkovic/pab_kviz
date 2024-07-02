@@ -70,7 +70,7 @@ class CustomDrawer extends StatelessWidget {
               title: Text('Dodaj Lokaciju'),
               onTap: () {
                 Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) =>  AddLokacijaPage(user: user)));
+                  context, MaterialPageRoute(builder: (context) =>  CreateLokacijaPage(user: user)));
               },
             ),
           ],

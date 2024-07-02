@@ -57,4 +57,26 @@ class LokacijaService {
       throw Exception('Failed to delete lokacija');
     }
   }
+
+  Future<void> createLokacija(Lokacija lokacija, String authToken) async {
+    final url = Uri.parse('$baseUrl.json?auth=$authToken');
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode(lokacija.toJson()),
+      );
+
+      if (response.statusCode == 200) {
+        print('Lokacija created successfully');
+      } else {
+        print('Failed to create lokacija. Error: ${response.reasonPhrase}');
+        // Handle error cases
+      }
+    } catch (e) {
+      print('Exception occurred while creating lokacija: $e');
+      // Handle exceptions
+    }
+  }
 }
