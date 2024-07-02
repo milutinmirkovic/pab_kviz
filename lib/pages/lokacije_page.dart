@@ -11,7 +11,7 @@ import 'package:pab_kviz/models/Korisnik.dart';
 class LokacijePage extends StatelessWidget {
   final LokacijaService lokacijaService = LokacijaService();
   final KvizService kvizService = KvizService();
-  final Korisnik? user; // Auth token
+  final Korisnik? user;
 
   LokacijePage({required this.user});
 
@@ -20,34 +20,25 @@ class LokacijePage extends StatelessWidget {
     return Scaffold(
       appBar: Navbar(title: 'Lokacije', user: user),
       drawer: CustomDrawer(user: user),
-      body: FutureBuilder<List<Lokacija>>(
-        future: lokacijaService.getLocations(user!.token ?? ''),
-        builder: (context, snapshot) {
+      body: FutureBuilder(
+        future: Future.wait([
+          lokacijaService.getLocations(user!.token ?? ''),
+          kvizService.getKvizovi(user!.token ?? ''),
+        ]),
+        builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No locations found'));
+            return Center(child: Text('No data found'));
           } else {
-            List<Lokacija> lokacije = snapshot.data!;
+            List<Lokacija> lokacije = snapshot.data![0];
+            List<Kviz> kvizovi = snapshot.data![1];
             return ListView(
               children: lokacije.map((lokacija) {
-                return FutureBuilder<List<Kviz>>(
-                  future: kvizService.getKvizovi(user!.token ?? ''),
-                  builder: (context, kvizSnapshot) {
-                    if (kvizSnapshot.connectionState == ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
-                    } else if (kvizSnapshot.hasError) {
-                      return Center(child: Text('Error: ${kvizSnapshot.error}'));
-                    } else if (!kvizSnapshot.hasData || kvizSnapshot.data!.isEmpty) {
-                      return LokacijaItem(lokacija: lokacija, kvizovi: []);
-                    } else {
-                      List<Kviz> kvizovi = kvizSnapshot.data!.where((kviz) => kviz.lokacijaId == lokacija.id).toList();
-                      return LokacijaItem(lokacija: lokacija, kvizovi: kvizovi);
-                    }
-                  },
-                );
+                List<Kviz> lokacijaKvizovi = kvizovi.where((kviz) => kviz.lokacijaId == lokacija.id).toList();
+                return LokacijaItem(user:user,lokacija:  lokacija, kvizovi: lokacijaKvizovi);
               }).toList(),
             );
           }

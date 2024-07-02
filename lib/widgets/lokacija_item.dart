@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pab_kviz/models/lokacija.dart';
 import 'package:pab_kviz/models/kviz.dart';
+import 'package:pab_kviz/models/Korisnik.dart';
+import 'package:pab_kviz/pages/prijava.dart';
 
 class LokacijaItem extends StatelessWidget {
   final Lokacija lokacija;
   final List<Kviz> kvizovi;
+  final Korisnik? user;
 
-  LokacijaItem({required this.lokacija, required this.kvizovi});
+  LokacijaItem({required this.lokacija, required this.kvizovi, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -15,52 +18,51 @@ class LokacijaItem extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center, // Align center
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              lokacija.naziv.toUpperCase(),
-              style: TextStyle(
-                fontSize: 30, // Increase font size
-                fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 255, 153, 0), // Orange color
-              ),
-              textAlign: TextAlign.center, // Center text
-            ),
-            SizedBox(height: 10),
             Image.asset(
-              'assets/${lokacija.slika}', 
+              'assets/${lokacija.slika}', // Assuming lokacija.slika holds the image filename
               width: double.infinity,
-              height: 400,
+              height: 200,
               fit: BoxFit.cover,
             ),
             SizedBox(height: 10),
             Text(
-              lokacija.opis,
-              style: TextStyle(fontSize: 16),
-              textAlign: TextAlign.center, // Center text
+              lokacija.naziv,
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 10),
-            Text(
-              lokacija.adresa,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center, // Center text
-            ),
+            Text(lokacija.opis),
+            SizedBox(height: 10),
+            Text('Adresa: ${lokacija.adresa}'),
             SizedBox(height: 10),
             Text(
               'Kvizovi na ovoj lokaciji:',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center, // Center text
             ),
             ...kvizovi.map((kviz) {
               return ListTile(
                 title: Text(kviz.naziv),
                 subtitle: Text(
-                  'Datum: ${kviz.datum}\nVreme: ${kviz.vreme}\nCena po igraču: ${kviz.cenaPoIgracu} RSD',
+                  'Datum: ${kviz.datum}\nVreme: ${kviz.vreme}\nCena po igraču: ${kviz.cenaPoIgracu} RSD\nBroj slobodnih mesta: ${kviz.brojSlobodnihMesta}',
                 ),
-                trailing: Icon(Icons.arrow_forward),
-                onTap: () {
-                  // Navigacija na detalje kviza
-                },
+                trailing: kviz.brojSlobodnihMesta > 0
+                  ? ElevatedButton(
+                      onPressed: () {
+                        // Navigacija na prijavu
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PrijavaPage(user: user, kviz: kviz),
+                          ),
+                        );
+                      },
+                      child: Text('Prijavi ekipu'),
+                    )
+                  : Text(
+                      'Popunjeno',
+                      style: TextStyle(color: Colors.red),
+                    ),
               );
             }).toList(),
           ],

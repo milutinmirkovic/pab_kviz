@@ -3,6 +3,7 @@ import 'package:pab_kviz/models/Korisnik.dart';
 import 'package:pab_kviz/pages/lokacije_page.dart';
 import 'package:pab_kviz/pages/kreiraj_kviz_page.dart';
 import 'package:pab_kviz/pages/home/home.dart';
+import 'package:pab_kviz/pages/kvizovi_page.dart';
 
 class CustomDrawer extends StatelessWidget {
   final Korisnik? user;
@@ -42,7 +43,8 @@ class CustomDrawer extends StatelessWidget {
             leading: Icon(Icons.quiz),
             title: Text('Kvizovi'),
             onTap: () {
-              Navigator.pushNamed(context, '/kvizovi');
+                Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) => KvizoviPage(user: user!)));
             },
           ),
           ListTile(

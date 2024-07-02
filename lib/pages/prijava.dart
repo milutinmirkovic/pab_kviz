@@ -1,5 +1,3 @@
-import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 import 'package:pab_kviz/models/Korisnik.dart';
 import 'package:pab_kviz/models/PrijavaModel.dart';
@@ -10,7 +8,7 @@ import 'package:pab_kviz/widgets/drawer.dart';
 import 'package:pab_kviz/widgets/navbar.dart';
 
 class PrijavaPage extends StatelessWidget {
-  PrijavaPage({super.key, required this.user, required this. kviz});
+  PrijavaPage({super.key, required this.user, required this.kviz});
   final Korisnik? user;
   final Kviz? kviz;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -18,7 +16,6 @@ class PrijavaPage extends StatelessWidget {
   TextEditingController _numPlayersController = TextEditingController();
   final PrijavaService prijavaService = PrijavaService();
   final KvizService kvizService = KvizService();
-
 
   @override
   Widget build(BuildContext context) {
@@ -63,41 +60,47 @@ class PrijavaPage extends StatelessWidget {
               ),
               SizedBox(height: 20.0),
               ElevatedButton(
-                onPressed: () {
-
-                  if(kviz?.brojSlobodnihMesta==0){
-                    print("Nema slobodnih mesta!");
-                  }else{
-
+                onPressed: () async {
+                  if (kviz?.brojSlobodnihMesta == 0) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Nema slobodnih mesta!'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  } else {
                     if (_formKey.currentState!.validate()) {
-                    // Form is validated, proceed with your logic
-                    // For now, you can print the values entered
-                    String teamName = _teamNameController.text;
-                    int numPlayers = int.parse(_numPlayersController.text);
-                    print('Ime ekipe: $teamName, Broj igraca: $numPlayers');
-                    Prijava prijava = Prijava(teamName: teamName, numPlayers: numPlayers, user: user, kviz: kviz);
-                    prijavaService.createPrijava(prijava); 
-                    kvizService.updateKviz(kviz!.id,kviz!.brojSlobodnihMesta,user!.token);
-                    
-                    
+                      // Form is validated, proceed with your logic
+                      String teamName = _teamNameController.text;
+                      int numPlayers = int.parse(_numPlayersController.text);
+                      Prijava prijava = Prijava(
+                        teamName: teamName,
+                        numPlayers: numPlayers,
+                        user: user,
+                        kviz: kviz,
+                      );
+                      await prijavaService.createPrijava(prijava);
+                      await kvizService.updateKviz(kviz!.id, kviz!.brojSlobodnihMesta - numPlayers, user!.token);
+                      
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text('Uspešno ste se prijavili'),
+                          backgroundColor: Colors.green,
+                        ),
+                      );
+
+                      // Očisti formu nakon prijave
+                      _teamNameController.clear();
+                      _numPlayersController.clear();
+                    }
                   }
-
-                  }
-
-
-                  
                 },
                 child: Text('Prijavi ekipu'),
               ),
             ],
           ),
         ),
-      ), 
-
-
-
-      
-      );
-    
-    }
+      ),
+    );
   }
+}

@@ -4,11 +4,16 @@ class KategorijaKviza {
   String? id;
   String naziv;
   bool humanitarni;
+  String opis;
+  String slika;
+
 
   KategorijaKviza({
     this.id,
     required this.naziv,
     required this.humanitarni,
+    required this.opis,
+    required this.slika
   });
 
   // Factory konstruktor za kreiranje instance KategorijaKviza iz mape
@@ -17,6 +22,8 @@ class KategorijaKviza {
       id: documentId.isEmpty ? null : documentId,
       naziv: data['naziv'],
       humanitarni: data['humanitarni'],
+      opis: data['opis'],
+      slika: data['slika'],
     );
   }
 
@@ -25,6 +32,8 @@ class KategorijaKviza {
     return {
       'naziv': naziv,
       'humanitarni': humanitarni,
+      'opis': opis,
+      'slika': slika,
     };
   }
 
