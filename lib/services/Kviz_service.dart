@@ -39,14 +39,16 @@ class KvizService {
 
 
    Future<void> updateKviz(String? kvizId, int currentBrojSlobodnihIgraca, String? token) async {
-    final url = Uri.parse('$baseUrl/$kvizId.json?=$token');
+    final url = Uri.parse('$baseUrl/$kvizId.json?auth=$token');
     final updatedBrojSlobodnihIgraca = currentBrojSlobodnihIgraca - 1;
 
     try {
-      final response = await http.put(
+      final response = await http.patch(
         url,
+        headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'broj_slobodnih_mesta': updatedBrojSlobodnihIgraca}),
-      );
+      
+       );
 
       if (response.statusCode == 200) {
         print('Kviz updated successfully');

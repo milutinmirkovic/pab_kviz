@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pab_kviz/models/Korisnik.dart';
+import 'package:pab_kviz/pages/kreiraj_lokaciju.dart';
 import 'package:pab_kviz/pages/lokacije_page.dart';
 import 'package:pab_kviz/pages/kreiraj_kviz_page.dart';
 import 'package:pab_kviz/pages/home/home.dart';
@@ -68,7 +69,8 @@ class CustomDrawer extends StatelessWidget {
               leading: Icon(Icons.add_location),
               title: Text('Dodaj Lokaciju'),
               onTap: () {
-                Navigator.pushNamed(context, '/dodajLokaciju'); // Ruta za stranicu za dodavanje lokacije
+                Navigator.pushReplacement(
+                  context, MaterialPageRoute(builder: (context) =>  AddLokacijaPage(user: user)));
               },
             ),
           ],
