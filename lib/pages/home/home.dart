@@ -32,8 +32,8 @@ class Home extends StatelessWidget {
               children: [
                 Image.asset(
                   'assets/kviz.jpeg',
-                  fit: BoxFit.cover, 
-                  height: 300, 
+                  fit: BoxFit.cover,
+                  height: 300,
                 ),
                 SizedBox(height: 16),
                 Padding(
@@ -73,17 +73,12 @@ class Home extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 16),
-                for (Kviz kviz in kvizovi.take(3))
+                for (Kviz kviz in kvizovi)
                   KvizItem(
                     kviz: kviz,
                     isAdmin: user.isAdmin,
                     user: user, // Pass user to KvizItem
-                    onDelete: () {
-                      // Implement delete logic here
-                    },
-                    onUpdate: () {
-                      // Implement update logic here
-                    },
+                    token: user.token ?? '', // Add token here
                   ),
               ],
             );

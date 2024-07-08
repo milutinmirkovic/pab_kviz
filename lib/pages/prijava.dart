@@ -12,10 +12,10 @@ class PrijavaPage extends StatelessWidget {
   final Korisnik? user;
   final Kviz? kviz;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  TextEditingController _teamNameController = TextEditingController();
-  TextEditingController _numPlayersController = TextEditingController();
   final PrijavaService prijavaService = PrijavaService();
   final KvizService kvizService = KvizService();
+  String? imeEkipe;
+  int? brojIgraca;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,6 @@ class PrijavaPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               TextFormField(
-                controller: _teamNameController,
                 decoration: InputDecoration(
                   labelText: 'Ime ekipe',
                   hintText: 'Unesite ime vaše ekipe',
@@ -39,22 +38,26 @@ class PrijavaPage extends StatelessWidget {
                   if (value == null || value.isEmpty) {
                     return 'Molimo vas unesite ime ekipe';
                   }
+                  imeEkipe = value;
                   return null;
                 },
               ),
               SizedBox(height: 20.0),
               TextFormField(
-                controller: _numPlayersController,
                 decoration: InputDecoration(
                   labelText: 'Broj igrača',
-                  hintText: 'Unesite broj igrača u vašoj ekipi',
+                  hintText: 'Unesite broj igrača u vašoj ekipi (2-6)',
                 ),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Molimo vas unesite broj igrača u vašoj ekipi';
                   }
-                  // You can add additional validation if needed, e.g., numeric validation
+                  int? broj = int.tryParse(value);
+                  if (broj == null || broj < 2 || broj > 6) {
+                    return 'Broj igrača mora biti između 2 i 6';
+                  }
+                  brojIgraca = broj;
                   return null;
                 },
               ),
@@ -70,19 +73,14 @@ class PrijavaPage extends StatelessWidget {
                     );
                   } else {
                     if (_formKey.currentState!.validate()) {
-                      // Form is validated, proceed with your logic
-                      String teamName = _teamNameController.text;
-                      int numPlayers = int.parse(_numPlayersController.text);
                       Prijava prijava = Prijava(
-                        teamName: teamName,
-                        numPlayers: numPlayers,
+                        teamName: imeEkipe!,
+                        numPlayers: brojIgraca!,
                         user: user,
                         kviz: kviz,
                       );
                       await prijavaService.createPrijava(prijava);
-                     // print(kviz!.id);
-                      //print(user!.token);
-                      await kvizService.updateKviz(kviz!.id, kviz!.brojSlobodnihMesta, user!.token);
+                      await kvizService.updateMesta(kviz!.id!, kviz!.brojSlobodnihMesta, user!.token!);
                       
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
@@ -91,9 +89,8 @@ class PrijavaPage extends StatelessWidget {
                         ),
                       );
 
-                      // Očisti formu nakon prijave
-                      _teamNameController.clear();
-                      _numPlayersController.clear();
+                      // Resetuj formu nakon prijave
+                      _formKey.currentState!.reset();
                     }
                   }
                 },

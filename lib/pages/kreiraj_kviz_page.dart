@@ -70,6 +70,44 @@ class _AddKvizPageState extends State<AddKvizPage> {
       }
     }
   }
+String? _validateDate(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Unesite datum kviza';
+    }
+    final dateRegExp = RegExp(r'^\d{2}.\d{2}.\d{4}$');
+    if (!dateRegExp.hasMatch(value)) {
+      return 'Unesite datum u formatu dd.mm.yyyy';
+    }
+    return null;
+  }
+
+  String? _validateTime(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Unesite vreme kviza';
+    }
+    final timeRegExp = RegExp(r'^\d{2}:\d{2}$');
+    if (!timeRegExp.hasMatch(value)) {
+      return 'Unesite vreme u formatu HH:mm';
+    }
+    final parts = value.split(':');
+    final hours = int.parse(parts[0]);
+    final minutes = int.parse(parts[1]);
+    if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+      return 'Unesite ispravno vreme';
+    }
+    return null;
+  }
+
+  String? _validatePrice(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Unesite cenu po igraču';
+    }
+    final price = double.tryParse(value);
+    if (price == null) {
+      return 'Cena mora biti broj';
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +145,7 @@ class _AddKvizPageState extends State<AddKvizPage> {
                 SizedBox(height: 20),
                 TextFormField(
                   decoration: textInputDecoration.copyWith(hintText: 'Vreme'),
-                  validator: (val) => val!.isEmpty ? 'Unesite vreme kviza' : null,
+                  validator: _validateTime,
                   onChanged: (val) {
                     setState(() => vreme = val);
                   },
@@ -115,7 +153,7 @@ class _AddKvizPageState extends State<AddKvizPage> {
                 SizedBox(height: 20),
                 TextFormField(
                   decoration: textInputDecoration.copyWith(hintText: 'Datum'),
-                  validator: (val) => val!.isEmpty ? 'Unesite datum kviza' : null,
+                  validator: _validateDate,
                   onChanged: (val) {
                     setState(() => datum = val);
                   },
@@ -123,7 +161,7 @@ class _AddKvizPageState extends State<AddKvizPage> {
                 SizedBox(height: 20),
                 TextFormField(
                   decoration: textInputDecoration.copyWith(hintText: 'Cena po igraču'),
-                  validator: (val) => val!.isEmpty ? 'Unesite cenu po igraču' : null,
+                  validator: _validatePrice,
                   keyboardType: TextInputType.number,
                   onChanged: (val) {
                     setState(() => cenaPoIgracu = double.parse(val));

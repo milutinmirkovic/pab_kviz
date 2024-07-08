@@ -48,12 +48,7 @@ class KategorijaItem extends StatelessWidget {
                 kviz: kviz,
                 isAdmin: user.isAdmin,
                 user: user,
-                onDelete: () {
-                  // Implement delete logic here
-                },
-                onUpdate: () {
-                  // Implement update logic here
-                },
+                token: user.token ?? '', // Add token here
               ),
           ],
         ),

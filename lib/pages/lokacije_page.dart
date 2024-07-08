@@ -38,7 +38,7 @@ class LokacijePage extends StatelessWidget {
             return ListView(
               children: lokacije.map((lokacija) {
                 List<Kviz> lokacijaKvizovi = kvizovi.where((kviz) => kviz.lokacijaId == lokacija.id).toList();
-                return LokacijaItem(user:user,lokacija:  lokacija, kvizovi: lokacijaKvizovi);
+                return LokacijaItem(user:user!,lokacija:  lokacija, kvizovi: lokacijaKvizovi);
               }).toList(),
             );
           }
