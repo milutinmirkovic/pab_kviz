@@ -24,10 +24,8 @@ class Home extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No upcoming quizzes found'));
           } else {
-            List<Kviz> kvizovi = snapshot.data!;
+            List<Kviz> kvizovi = snapshot.data ?? [];
             return ListView(
               children: [
                 Image.asset(
@@ -73,12 +71,14 @@ class Home extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 16),
+                if (kvizovi.isEmpty)
+                  Center(child: Text('Nema predstojećih kvizova')),
                 for (Kviz kviz in kvizovi)
                   KvizItem(
                     kviz: kviz,
                     isAdmin: user.isAdmin,
-                    user: user, // Pass user to KvizItem
-                    token: user.token ?? '', // Add token here
+                    user: user,
+                    token: user.token ?? '',
                   ),
               ],
             );

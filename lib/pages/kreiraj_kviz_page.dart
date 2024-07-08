@@ -77,7 +77,7 @@ String? _validateDate(String? value) {
     final dateRegExp = RegExp(r'^\d{2}.\d{2}.\d{4}$');
     if (!dateRegExp.hasMatch(value)) {
       return 'Unesite datum u formatu dd.mm.yyyy';
-    }
+    } 
     return null;
   }
 

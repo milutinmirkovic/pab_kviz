@@ -5,10 +5,7 @@ import 'package:pab_kviz/pages/home/home.dart';
 import 'package:pab_kviz/services/auth.dart';
 import 'package:pab_kviz/shared/constants.dart';
 
-class   SignIn extends StatefulWidget {
-  //final Function? toggleView;
-  //const SignIn({Key? key, required this.toggleView}) : super(key: key);
-
+class SignIn extends StatefulWidget {
   @override
   _SignInState createState() => _SignInState();
 }
@@ -26,13 +23,11 @@ class _SignInState extends State<SignIn> {
       body: Stack(
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
-             
-            ),
+            decoration: BoxDecoration(),
           ),
           Center(
             child: Container(
-              width: 300, // Smanjuje širinu prozora
+              width: 300,
               padding: EdgeInsets.all(16.0),
               margin: EdgeInsets.symmetric(horizontal: 20.0),
               decoration: BoxDecoration(
@@ -97,7 +92,7 @@ class _SignInState extends State<SignIn> {
                               setState(() {
                                 error = 'Neuspešno logovanje';
                               });
-                            }else{
+                            } else {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(builder: (context) => Home(user: result)),

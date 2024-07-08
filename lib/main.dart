@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:pab_kviz/pages/authenticate/sign_in.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:pab_kviz/models/Korisnik.dart';
 import 'package:pab_kviz/services/auth.dart';
-import 'package:pab_kviz/wrapper.dart';
-import 'package:pab_kviz/pages/lokacije_page.dart';
-
+import 'package:pab_kviz/pages/authenticate/sign_in.dart';
+import 'package:pab_kviz/pages/home/home.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,10 +35,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         home: SignIn(),
         routes: {
-          //'/kvizovi': (context) => KvizoviPage(user: Provider.of<Korisnik>(context)!),
-          //'/lokacije': (context) => LokacijePage(user: Provider.of<Korisnik>(context)!),
-        //  '/prijava': (context) => PrijavaPage(user: Provider.of<Korisnik>(context)!),
-          // Dodajte ovde ostale rute prema potrebi
+          '/home': (context) => Home(user: Provider.of<Korisnik>(context)!),
         },
       ),
     );

@@ -44,7 +44,7 @@ class _KvizoviPageState extends State<KvizoviPage> {
           } else if (kategorijeSnapshot.hasError) {
             return Center(child: Text('Error: ${kategorijeSnapshot.error}'));
           } else if (!kategorijeSnapshot.hasData || kategorijeSnapshot.data!.isEmpty) {
-            return Center(child: Text('No categories found'));
+            return Center(child: Text('Nema dostupnih kategorija'));
           } else {
             return FutureBuilder<List<Kviz>>(
               future: _kvizoviFuture,
@@ -53,11 +53,9 @@ class _KvizoviPageState extends State<KvizoviPage> {
                   return Center(child: CircularProgressIndicator());
                 } else if (kvizoviSnapshot.hasError) {
                   return Center(child: Text('Error: ${kvizoviSnapshot.error}'));
-                } else if (!kvizoviSnapshot.hasData || kvizoviSnapshot.data!.isEmpty) {
-                  return Center(child: Text('No quizzes found'));
                 } else {
                   List<KategorijaKviza> kategorije = kategorijeSnapshot.data!;
-                  List<Kviz> kvizovi = kvizoviSnapshot.data!;
+                  List<Kviz> kvizovi = kvizoviSnapshot.data ?? [];
 
                   return ListView(
                     children: kategorije.map((kategorija) {

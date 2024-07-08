@@ -5,6 +5,7 @@ import 'package:pab_kviz/pages/lokacije_page.dart';
 import 'package:pab_kviz/pages/kreiraj_kviz_page.dart';
 import 'package:pab_kviz/pages/home/home.dart';
 import 'package:pab_kviz/pages/kvizovi_page.dart';
+import 'package:pab_kviz/pages/pregled_kvizova.dart'; // Import ispravno
 
 class CustomDrawer extends StatelessWidget {
   final Korisnik? user;
@@ -44,7 +45,7 @@ class CustomDrawer extends StatelessWidget {
             leading: Icon(Icons.quiz),
             title: Text('Kvizovi'),
             onTap: () {
-                Navigator.pushReplacement(
+              Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (context) => KvizoviPage(user: user!)));
             },
           ),
@@ -60,17 +61,25 @@ class CustomDrawer extends StatelessWidget {
             ListTile(
               leading: Icon(Icons.add),
               title: Text('Dodaj Kviz'),
-               onTap: () {
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) =>  AddKvizPage(user: user)));
-            },
+              onTap: () {
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (context) => AddKvizPage(user: user)));
+              },
             ),
             ListTile(
               leading: Icon(Icons.add_location),
               title: Text('Dodaj Lokaciju'),
               onTap: () {
                 Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) =>  CreateLokacijaPage(user: user)));
+                    context, MaterialPageRoute(builder: (context) => CreateLokacijaPage(user: user)));
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.list),
+              title: Text('Pregled Kvizova'), // Dodata nova stavka u meni
+              onTap: () {
+                Navigator.pushReplacement(
+                    context, MaterialPageRoute(builder: (context) => PregledKvizovaPage(user: user!))); // Navigacija na stranicu Pregled Kvizova
               },
             ),
           ],

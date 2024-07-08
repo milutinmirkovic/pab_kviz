@@ -20,12 +20,16 @@ class LokacijaItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Image.asset(
-              'assets/${lokacija.slika}', // Assuming lokacija.slika holds the image filename
-              width: double.infinity,
-              height: 200,
-              fit: BoxFit.cover,
-            ),
+            if (lokacija.slika != null && lokacija.slika.isNotEmpty)
+              Image.asset(
+                'assets/${lokacija.slika}', // Assuming lokacija.slika holds the image filename
+                width: double.infinity,
+                height: 400,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return SizedBox.shrink(); // If image fails to load, show nothing
+                },
+              ),
             SizedBox(height: 10),
             Text(
               lokacija.naziv,
