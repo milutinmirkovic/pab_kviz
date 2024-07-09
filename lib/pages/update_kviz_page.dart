@@ -176,7 +176,7 @@ class _UpdateKvizPageState extends State<UpdateKvizPage> {
     try {
       await KvizService().updateKviz(updatedKviz, widget.user.token!);
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Kviz uspešno ažuriran!')));
-      Navigator.pop(context);
+      Navigator.pushNamed(context, '/home');
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Greška pri ažuriranju kviza!')));
     }
