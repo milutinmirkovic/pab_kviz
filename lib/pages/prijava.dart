@@ -83,7 +83,7 @@ class PrijavaPage extends StatelessWidget {
                       );
                       await prijavaService.createPrijava(prijava, user!.token!);
                       await kvizService.updateMesta(kviz!.id!, kviz!.brojSlobodnihMesta, user!.token!);
-                      Navigator.pop(context);
+                      Navigator.pushNamed(context, '/home');
                       
                       
                       ScaffoldMessenger.of(context).showSnackBar(

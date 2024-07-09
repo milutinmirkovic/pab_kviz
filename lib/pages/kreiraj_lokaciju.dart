@@ -33,7 +33,7 @@ class _CreateLokacijaPageState extends State<CreateLokacijaPage> {
   @override
   Widget build(BuildContext context) {
     final String? authToken = user!.token;
-    print(authToken);
+   // print(authToken);
     return Scaffold(
       appBar: Navbar(title: 'PAB KVIZ 8x8', user: user),
       drawer: CustomDrawer(user: user),
@@ -94,8 +94,8 @@ class _CreateLokacijaPageState extends State<CreateLokacijaPage> {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     // Get the auth token
-                    User? user = FirebaseAuth.instance.currentUser;
-                    String? authToken = await user?.getIdToken();
+                    
+                    String? authToken = Korisnik.getCurrentUser()!.token;
 
                     if (authToken != null) {
                       Lokacija newLokacija = Lokacija(
