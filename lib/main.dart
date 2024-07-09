@@ -10,15 +10,15 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
     await Firebase.initializeApp(
-      options: FirebaseOptions(
-        apiKey: "AIzaSyBmEVH20wKrwvDUsY_q_vijhBjXciWiB2Q",
+      options: const FirebaseOptions(
+       apiKey: "AIzaSyBmEVH20wKrwvDUsY_q_vijhBjXciWiB2Q",
         appId: "1:153624684587:android:abc123def456",
         messagingSenderId: "153624684587",
         projectId: "organizacija-pab-kvizova",
       ),
     );
 
-    print("Firebase initialized successfully.");
+    
 
     runApp(MyApp());
   } catch (e) {
@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         home: SignIn(),
         routes: {
-          '/home': (context) => Home(user: Provider.of<Korisnik>(context)!),
+          '/home': (context) => Home(user: Provider.of<Korisnik>(context)),
         },
       ),
     );

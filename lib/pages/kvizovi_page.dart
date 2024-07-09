@@ -40,17 +40,17 @@ class _KvizoviPageState extends State<KvizoviPage> {
         future: _kategorijeFuture,
         builder: (context, kategorijeSnapshot) {
           if (kategorijeSnapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (kategorijeSnapshot.hasError) {
             return Center(child: Text('Error: ${kategorijeSnapshot.error}'));
           } else if (!kategorijeSnapshot.hasData || kategorijeSnapshot.data!.isEmpty) {
-            return Center(child: Text('Nema dostupnih kategorija'));
+            return const Center(child: Text('Nema dostupnih kategorija'));
           } else {
             return FutureBuilder<List<Kviz>>(
               future: _kvizoviFuture,
               builder: (context, kvizoviSnapshot) {
                 if (kvizoviSnapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (kvizoviSnapshot.hasError) {
                   return Center(child: Text('Error: ${kvizoviSnapshot.error}'));
                 } else {

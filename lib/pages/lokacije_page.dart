@@ -30,7 +30,7 @@ class LokacijePage extends StatelessWidget {
             if (snapshot.hasError) {
               return Center(child: Text('Greška: ${snapshot.error}'));
             } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Center(child: Text('Nema podataka'));
+              return const Center(child: Text('Nema podataka'));
             } else {
               List<Lokacija> lokacije = snapshot.data![0] as List<Lokacija>;
               List<Kviz> kvizovi = snapshot.data![1] as List<Kviz>;
@@ -44,7 +44,7 @@ class LokacijePage extends StatelessWidget {
               );
             }
           } else {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: const CircularProgressIndicator());
           }
         },
       ),

@@ -5,33 +5,9 @@ import 'package:pab_kviz/models/kategorija_kviza.dart';
 class KategorijaKvizaService {
   final String baseUrl = 'https://organizacija-pab-kvizova-default-rtdb.europe-west1.firebasedatabase.app/kategorije_kviza';
 
-  // Metod za dodavanje nove kategorije kviza
-  Future<void> addKategorija(KategorijaKviza kategorija, String token) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl.json?auth=$token'),
-      body: json.encode(kategorija.toMap()),
-    );
-    if (response.statusCode == 200) {
-      final responseData = json.decode(response.body);
-      kategorija.id = responseData['name']; // Čuvanje ID-a nove kategorije
-    } else {
-      throw Exception('Failed to add kategorija kviza');
-    }
-  }
 
-  // Metod za ažuriranje postojeće kategorije kviza
-  Future<void> updateKategorija(KategorijaKviza kategorija, String token) async {
-    if (kategorija.id == null) throw ArgumentError('Kategorija must have an id to be updated.');
-    final response = await http.put(
-      Uri.parse('$baseUrl/${kategorija.id}.json?auth=$token'),
-      body: json.encode(kategorija.toMap()),
-    );
-    if (response.statusCode != 200) {
-      throw Exception('Failed to update kategorija kviza');
-    }
-  }
 
-  // Metod za učitavanje svih kategorija kviza
+  // GET kategorije
   Future<List<KategorijaKviza>> getKategorije(String token) async {
     final response = await http.get(Uri.parse('$baseUrl.json?auth=$token'));
     if (response.statusCode == 200) {
@@ -44,17 +20,8 @@ class KategorijaKvizaService {
         return [];
       }
     } else {
-      throw Exception('Failed to load kategorije kviza');
+      throw Exception('Kategorije nisu ucitane');
     }
   }
 
-  // Metod za brisanje postojeće kategorije kviza
-  Future<void> deleteKategorija(String id, String token) async {
-    final response = await http.delete(
-      Uri.parse('$baseUrl/$id.json?auth=$token'),
-    );
-    if (response.statusCode != 200) {
-      throw Exception('Failed to delete kategorija kviza');
-    }
-  }
 }

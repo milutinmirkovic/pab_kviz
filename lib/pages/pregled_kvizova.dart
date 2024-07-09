@@ -21,11 +21,11 @@ class PregledKvizovaPage extends StatelessWidget {
         future: kvizService.getKvizovi(user.token!),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('Kvizovi nisu pronađeni'));
+            return const Center(child: Text('Kvizovi nisu pronađeni'));
           } else {
             List<Kviz> kvizovi = snapshot.data!;
             return ListView.builder(
@@ -51,29 +51,29 @@ class KvizCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               kviz.naziv,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text('Datum: ${kviz.datum}'),
             Text('Vreme: ${kviz.vreme}'),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             FutureBuilder<List<Prijava>>(
               future: kvizService.getPrijaveZaKviz(kviz.id!, user.token!),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(child: Text('Prijave nisu pronađene'));
+                  return const Center(child: Text('Prijave nisu pronađene'));
                 } else {
                   List<Prijava> prijave = snapshot.data!;
                   return Column(
@@ -83,27 +83,27 @@ class KvizCard extends StatelessWidget {
                       Text('Broj preostalih mesta: ${kviz.brojSlobodnihMesta}'),
                       Text('Prihod od kotizacija: ${prijave.fold(0.0, (total, prijava) => total + prijava.kotizacija)} RSD'),
                       Text('Ukupno ljudi: ${prijave.fold(0, (total, prijava) => total + prijava.numPlayers)}'),
-                      Divider(),
+                      const Divider(),
                       ...prijave.map((prijava) {
                         return ListTile(
                           title: Text(prijava.teamName),
                           subtitle: Text(prijava.emailUser),
                           trailing: IconButton(
-                            icon: Icon(Icons.delete),
+                            icon: const Icon(Icons.delete),
                             onPressed: () async {
                               bool success = await kvizService.deletePrijava(prijava.id!, user.token!);
                               if (success) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
+                                  const SnackBar(
                                     content: Text('Prijava uspešno obrisana'),
                                     backgroundColor: Colors.green,
                                   ),
                                 );
-                                await kvizService.updateMesta(kviz.id!, kviz.brojSlobodnihMesta + 1, user.token!);
+                                await kvizService.updateMesta(kviz.id!, kviz.brojSlobodnihMesta + 2, user.token!);
                                 (context as Element).reassemble();
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
+                                  const SnackBar(
                                     content: Text('Brisanje prijave nije uspelo'),
                                     backgroundColor: Colors.red,
                                   ),

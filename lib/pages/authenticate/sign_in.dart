@@ -23,13 +23,13 @@ class _SignInState extends State<SignIn> {
       body: Stack(
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(),
+            decoration: const BoxDecoration(),
           ),
           Center(
             child: Container(
               width: 300,
-              padding: EdgeInsets.all(16.0),
-              margin: EdgeInsets.symmetric(horizontal: 20.0),
+              padding: const EdgeInsets.all(16.0),
+              margin: const EdgeInsets.symmetric(horizontal: 20.0),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.8),
                 borderRadius: BorderRadius.circular(10.0),
@@ -44,8 +44,8 @@ class _SignInState extends State<SignIn> {
                         'assets/logo.png',
                         height: 100,
                       ),
-                      SizedBox(height: 20),
-                      Text(
+                      const SizedBox(height: 20),
+                      const Text(
                         'Dobrodošli! ',
                         style: TextStyle(
                           fontSize: 24,
@@ -53,12 +53,12 @@ class _SignInState extends State<SignIn> {
                           color: Colors.orange,
                         ),
                       ),
-                      SizedBox(height: 10),
-                      Text(
+                      const SizedBox(height: 10),
+                      const Text(
                         'Molimo Vas da se ulogujete',
                         style: TextStyle(fontSize: 16, color: Colors.grey),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       TextFormField(
                         decoration: textInputDecoration.copyWith(hintText: 'Email'),
                         validator: (val) => val!.isEmpty ? 'Unesite email' : null,
@@ -66,7 +66,7 @@ class _SignInState extends State<SignIn> {
                           setState(() => email = val);
                         },
                       ),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       TextFormField(
                         decoration: textInputDecoration.copyWith(hintText: 'Lozinka'),
                         validator: (val) => val!.length < 6 ? 'Unesite lozinku od 6+ karaktera' : null,
@@ -75,13 +75,13 @@ class _SignInState extends State<SignIn> {
                           setState(() => password = val);
                         },
                       ),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange,
-                          padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                         ),
-                        child: Text(
+                        child: const Text(
                           'Uloguj se',
                           style: TextStyle(color: Colors.white),
                         ),
@@ -101,12 +101,12 @@ class _SignInState extends State<SignIn> {
                           }
                         },
                       ),
-                      SizedBox(height: 12.0),
+                      const SizedBox(height: 12.0),
                       Text(
                         error,
-                        style: TextStyle(color: Colors.red, fontSize: 14.0),
+                        style: const TextStyle(color: Colors.red, fontSize: 14.0),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       TextButton(
                         onPressed: () {
                           Navigator.pushReplacement(
@@ -114,7 +114,7 @@ class _SignInState extends State<SignIn> {
                             MaterialPageRoute(builder: (context) => Register()),
                           );
                         },
-                        child: Text(
+                        child: const Text(
                           "Nemate nalog? Napravite ga",
                           style: TextStyle(color: Colors.orange),
                         ),

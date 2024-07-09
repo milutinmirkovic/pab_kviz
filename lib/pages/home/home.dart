@@ -28,9 +28,9 @@ class Home extends StatelessWidget {
                 fit: BoxFit.cover,
                 height: 300,
               ),
-              SizedBox(height: 16),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
+              const SizedBox(height: 16),
+              const Padding(
+                padding: EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -39,7 +39,7 @@ class Home extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: const Color.fromARGB(255, 255, 153, 0),
+                        color: Color.fromARGB(255, 255, 153, 0),
                       ),
                     ),
                     SizedBox(height: 16),
@@ -54,20 +54,20 @@ class Home extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 16),
-              Center(
+              const SizedBox(height: 16),
+              const Center(
                 child: Text(
                   'Najave za naredne kvizove',
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: const Color.fromARGB(255, 255, 153, 0),
+                    color: Color.fromARGB(255, 255, 153, 0),
                   ),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               if (kvizovi.isEmpty)
-                Center(child: Text('Nema predstojećih kvizova')),
+                const Center(child: Text('Nema predstojećih kvizova')),
               for (Kviz kviz in kvizovi)
                 KvizItem(
                   kviz: kviz,

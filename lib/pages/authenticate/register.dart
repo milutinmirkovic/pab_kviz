@@ -25,15 +25,15 @@ class _RegisterState extends State<Register> {
       body: Stack(
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               
             ),
           ),
           Center(
             child: Container(
               width: 300, // Smanjuje širinu prozora
-              padding: EdgeInsets.all(16.0),
-              margin: EdgeInsets.symmetric(horizontal: 20.0),
+              padding: const EdgeInsets.all(16.0),
+              margin: const EdgeInsets.symmetric(horizontal: 20.0),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.8),
                 borderRadius: BorderRadius.circular(10.0),
@@ -48,8 +48,8 @@ class _RegisterState extends State<Register> {
                         'assets/logo.png',
                         height: 100,
                       ),
-                      SizedBox(height: 20),
-                      Text(
+                      const SizedBox(height: 20),
+                      const Text(
                         'Napravite nalog',
                         style: TextStyle(
                           fontSize: 24,
@@ -57,7 +57,7 @@ class _RegisterState extends State<Register> {
                           color: Colors.orange,
                         ),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       TextFormField(
                         decoration: textInputDecoration.copyWith(hintText: 'Email'),
                         validator: (val) => val!.isEmpty ? 'Unesite email' : null,
@@ -65,7 +65,7 @@ class _RegisterState extends State<Register> {
                           setState(() => email = val);
                         },
                       ),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       TextFormField(
                         decoration: textInputDecoration.copyWith(hintText: 'Lozinka'),
                         validator: (val) => val!.length < 6 ? 'Unesite lozinku od 6+ karaktera' : null,
@@ -74,13 +74,13 @@ class _RegisterState extends State<Register> {
                           setState(() => password = val);
                         },
                       ),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.orange,
-                          padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                         ),
-                        child: Text(
+                        child: const Text(
                           'Registruj se',
                           style: TextStyle(color: Colors.white),
                         ),
@@ -100,12 +100,12 @@ class _RegisterState extends State<Register> {
                           }
                         },
                       ),
-                      SizedBox(height: 12.0),
+                      const SizedBox(height: 12.0),
                       Text(
                         error,
-                        style: TextStyle(color: Colors.red, fontSize: 14.0),
+                        style: const TextStyle(color: Colors.red, fontSize: 14.0),
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       TextButton(
                         onPressed: () {
                           Navigator.pushReplacement(
@@ -113,7 +113,7 @@ class _RegisterState extends State<Register> {
                             MaterialPageRoute(builder: (context) => SignIn()),
                           );
                         },
-                        child: Text(
+                        child: const Text(
                           'Već imate nalog? Prijavite se',
                           style: TextStyle(color: Colors.orange),
                         ),

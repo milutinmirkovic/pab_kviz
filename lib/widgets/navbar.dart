@@ -28,14 +28,14 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
             },
             child: Image.asset('assets/logo.png', height: 30),
           ),
-          SizedBox(width: 10),
+          const SizedBox(width: 10),
           Text(title),
         ],
       ),
       actions: <Widget>[
         TextButton.icon(
-          icon: Icon(Icons.person),
-          label: Text('Logout'),
+          icon: const Icon(Icons.person),
+          label: const Text('Logout'),
           onPressed: () async {
             await _auth.signOut();
             // Navigate to SignIn page
@@ -50,5 +50,5 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }

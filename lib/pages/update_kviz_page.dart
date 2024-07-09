@@ -79,7 +79,7 @@ class _UpdateKvizPageState extends State<UpdateKvizPage> {
       appBar: Navbar(title: 'Ažuriraj Kviz', user: widget.user),
       drawer: CustomDrawer(user: widget.user),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
@@ -88,7 +88,7 @@ class _UpdateKvizPageState extends State<UpdateKvizPage> {
               children: <Widget>[
                 TextFormField(
                   initialValue: naziv,
-                  decoration: InputDecoration(labelText: 'Naziv'),
+                  decoration: const InputDecoration(labelText: 'Naziv'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Unesite naziv kviza';
@@ -99,38 +99,38 @@ class _UpdateKvizPageState extends State<UpdateKvizPage> {
                     naziv = value!;
                   },
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 TextFormField(
                   initialValue: datum,
-                  decoration: InputDecoration(labelText: 'Datum'),
+                  decoration: const InputDecoration(labelText: 'Datum'),
                   validator: _validateDate,
                   onSaved: (value) {
                     datum = value!;
                   },
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 TextFormField(
                   initialValue: vreme,
-                  decoration: InputDecoration(labelText: 'Vreme'),
+                  decoration: const InputDecoration(labelText: 'Vreme'),
                   validator: _validateTime,
                   onSaved: (value) {
                     vreme = value!;
                   },
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 TextFormField(
                   initialValue: cenaPoIgracu,
-                  decoration: InputDecoration(labelText: 'Cena po igraču'),
+                  decoration: const InputDecoration(labelText: 'Cena po igraču'),
                   keyboardType: TextInputType.number,
                   validator: _validatePrice,
                   onSaved: (value) {
                     cenaPoIgracu = value!;
                   },
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 TextFormField(
                   initialValue: brojSlobodnihMesta,
-                  decoration: InputDecoration(labelText: 'Broj slobodnih mesta'),
+                  decoration: const InputDecoration(labelText: 'Broj slobodnih mesta'),
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -142,7 +142,7 @@ class _UpdateKvizPageState extends State<UpdateKvizPage> {
                     brojSlobodnihMesta = value!;
                   },
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
@@ -150,7 +150,7 @@ class _UpdateKvizPageState extends State<UpdateKvizPage> {
                       _updateKviz();
                     }
                   },
-                  child: Text('Ažuriraj Kviz'),
+                  child: const Text('Ažuriraj Kviz'),
                 ),
               ],
             ),
@@ -175,10 +175,10 @@ class _UpdateKvizPageState extends State<UpdateKvizPage> {
 
     try {
       await KvizService().updateKviz(updatedKviz, widget.user.token!);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Kviz uspešno ažuriran!')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Kviz uspešno ažuriran!')));
       Navigator.pop(context);
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Greška pri ažuriranju kviza!')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Greška pri ažuriranju kviza!')));
     }
   }
 }

@@ -15,38 +15,38 @@ class LokacijaItem extends StatelessWidget {
   Widget build(BuildContext context) {
     print('Prikazujem lokaciju: ${lokacija.naziv}'); // Debug print za nazive lokacija
     return Card(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (lokacija.slika != null && lokacija.slika.isNotEmpty)
+            if ( lokacija.slika.isNotEmpty)
               Image.asset(
                 'assets/${lokacija.slika}', // Assuming lokacija.slika holds the image filename
                 width: double.infinity,
                 height: 400,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
-                  return SizedBox.shrink(); // If image fails to load, show nothing
+                  return const SizedBox.shrink(); // If image fails to load, show nothing
                 },
               ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               lokacija.naziv,
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(lokacija.opis),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text('Adresa: ${lokacija.adresa}'),
-            SizedBox(height: 10),
-            Text(
+            const SizedBox(height: 10),
+            const Text(
               'Kvizovi na ovoj lokaciji:',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             if (kvizovi.isEmpty)
-              Text('Nema predstojećih kvizova'),
+              const Text('Nema predstojećih kvizova'),
             for (Kviz kviz in kvizovi)
               KvizItem(
                 kviz: kviz,

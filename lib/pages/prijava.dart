@@ -23,14 +23,14 @@ class PrijavaPage extends StatelessWidget {
       appBar: Navbar(title: 'PAB KVIZ 8x8', user: user),
       drawer: CustomDrawer(user: user),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Ime ekipe',
                   hintText: 'Unesite ime vaše ekipe',
                 ),
@@ -42,9 +42,9 @@ class PrijavaPage extends StatelessWidget {
                   return null;
                 },
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Broj igrača',
                   hintText: 'Unesite broj igrača u vašoj ekipi (2-6)',
                 ),
@@ -61,12 +61,12 @@ class PrijavaPage extends StatelessWidget {
                   return null;
                 },
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () async {
                   if (kviz?.brojSlobodnihMesta == 0) {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
+                      const SnackBar(
                         content: Text('Nema slobodnih mesta!'),
                         backgroundColor: Colors.red,
                       ),
@@ -84,7 +84,7 @@ class PrijavaPage extends StatelessWidget {
                       await kvizService.updateMesta(kviz!.id!, kviz!.brojSlobodnihMesta, user!.token!);
                       
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text('Uspešno ste se prijavili'),
                           backgroundColor: Colors.green,
                         ),
@@ -95,7 +95,7 @@ class PrijavaPage extends StatelessWidget {
                     }
                   }
                 },
-                child: Text('Prijavi ekipu'),
+                child: const Text('Prijavi ekipu'),
               ),
             ],
           ),

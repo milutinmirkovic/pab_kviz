@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:pab_kviz/models/Korisnik.dart';
 import 'package:pab_kviz/models/Lokacija.dart';
 import 'package:pab_kviz/models/kviz.dart';
 import 'package:pab_kviz/models/PrijavaModel.dart';
@@ -9,6 +8,60 @@ class KvizService {
   final String baseUrl = 'https://organizacija-pab-kvizova-default-rtdb.europe-west1.firebasedatabase.app/kvizovi';
   final String prijaveUrl = 'https://organizacija-pab-kvizova-default-rtdb.europe-west1.firebasedatabase.app/prijave';
   final String lokacijeUrl = 'https://organizacija-pab-kvizova-default-rtdb.europe-west1.firebasedatabase.app/lokacije';
+
+
+
+
+
+// Dodavanje kviza
+  Future<void> insertKviz(Kviz kviz, String token) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl.json?auth=$token'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(kviz.toJson()),
+    );
+    if (response.statusCode != 200) {
+      throw Exception('Neuspešno dodavanje kviza');
+    }
+  }
+
+  // Ažuriranje kviza
+  Future<void> updateKviz(Kviz kviz, String token) async {
+    final url = Uri.parse('$baseUrl/${kviz.id}.json?auth=$token');
+    final response = await http.patch(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(kviz.toJson()),
+    );
+    if (response.statusCode != 200) {
+      throw Exception('Neuspešno ažuriranje kviza');
+    }
+  }
+
+  // Dobijanje svih kvizova
+  Future<List<Kviz>> getKvizovi(String token) async {
+    final response = await http.get(Uri.parse('$baseUrl.json?auth=$token'));
+    if (response.statusCode == 200) {
+      Map<String, dynamic>? data = json.decode(response.body);
+      if (data == null) {
+        return [];
+      }
+      List<Kviz> kvizovi = [];
+      data.forEach((key, value) {
+        Kviz kviz = Kviz.fromMap(value, key);
+        kvizovi.add(kviz);
+      });
+      return kvizovi;
+    } else {
+      throw Exception('Neuspešno učitavanje kvizova');
+    }
+  }
+
+
+
+
+
+
 
   // Ažuriranje broja slobodnih mesta
   Future<void> updateMesta(String kvizId, int currentBrojSlobodnihIgraca, String token) async {
@@ -19,7 +72,7 @@ class KvizService {
       final response = await http.patch(
         url,
         headers: {'Content-Type': 'application/json'},
-        body: jsonEncode({'brojSlobodnihMesta': updatedBrojSlobodnihIgraca}),
+        body: jsonEncode({'broj_slobodnih_mesta': updatedBrojSlobodnihIgraca}),
       );
 
       if (response.statusCode != 200) {
@@ -116,47 +169,5 @@ class KvizService {
     }
   }
 
-  // Dodavanje kviza
-  Future<void> addKviz(Kviz kviz, String token) async {
-    final response = await http.post(
-      Uri.parse('$baseUrl.json?auth=$token'),
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(kviz.toJson()),
-    );
-    if (response.statusCode != 200) {
-      throw Exception('Neuspešno dodavanje kviza');
-    }
-  }
-
-  // Ažuriranje kviza
-  Future<void> updateKviz(Kviz kviz, String token) async {
-    final url = Uri.parse('$baseUrl/${kviz.id}.json?auth=$token');
-    final response = await http.patch(
-      url,
-      headers: {'Content-Type': 'application/json'},
-      body: jsonEncode(kviz.toJson()),
-    );
-    if (response.statusCode != 200) {
-      throw Exception('Neuspešno ažuriranje kviza');
-    }
-  }
-
-  // Dobijanje svih kvizova
-  Future<List<Kviz>> getKvizovi(String token) async {
-    final response = await http.get(Uri.parse('$baseUrl.json?auth=$token'));
-    if (response.statusCode == 200) {
-      Map<String, dynamic>? data = json.decode(response.body);
-      if (data == null) {
-        return [];
-      }
-      List<Kviz> kvizovi = [];
-      data.forEach((key, value) {
-        Kviz kviz = Kviz.fromMap(value, key);
-        kvizovi.add(kviz);
-      });
-      return kvizovi;
-    } else {
-      throw Exception('Neuspešno učitavanje kvizova');
-    }
-  }
+  
 }

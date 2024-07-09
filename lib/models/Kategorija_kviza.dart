@@ -16,7 +16,7 @@ class KategorijaKviza {
     required this.slika
   });
 
-  // Factory konstruktor za kreiranje instance KategorijaKviza iz mape
+
   factory KategorijaKviza.fromMap(Map<String, dynamic> data, String documentId) {
     return KategorijaKviza(
       id: documentId.isEmpty ? null : documentId,
@@ -27,7 +27,7 @@ class KategorijaKviza {
     );
   }
 
-  // Metoda za konvertovanje instance KategorijaKviza u mapu
+ 
   Map<String, dynamic> toMap() {
     return {
       'naziv': naziv,
@@ -37,9 +37,9 @@ class KategorijaKviza {
     };
   }
 
-  // Metoda za konvertovanje instance KategorijaKviza u JSON string
+  
   String toJson() => json.encode(toMap());
 
-  // Factory konstruktor za kreiranje instance KategorijaKviza iz JSON stringa
+  
   factory KategorijaKviza.fromJson(String source) => KategorijaKviza.fromMap(json.decode(source), "");
 }

@@ -18,7 +18,7 @@ class CustomDrawer extends StatelessWidget {
         children: <Widget>[
           Container(
             height: 120,
-            child: DrawerHeader(
+            child: const DrawerHeader(
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 255, 153, 0),
               ),
@@ -34,24 +34,24 @@ class CustomDrawer extends StatelessWidget {
             ),
           ),
           ListTile(
-            leading: Icon(Icons.home),
-            title: Text('Početna'),
+            leading: const Icon(Icons.home),
+            title: const Text('Početna'),
             onTap: () {
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (context) => Home(user: user!)));
             },
           ),
           ListTile(
-            leading: Icon(Icons.quiz),
-            title: Text('Kvizovi'),
+            leading: const Icon(Icons.quiz),
+            title: const Text('Kvizovi'),
             onTap: () {
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (context) => KvizoviPage(user: user!)));
             },
           ),
           ListTile(
-            leading: Icon(Icons.location_on),
-            title: Text('Lokacije'),
+            leading: const Icon(Icons.location_on),
+            title: const Text('Lokacije'),
             onTap: () {
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (context) => LokacijePage(user: user)));
@@ -59,24 +59,24 @@ class CustomDrawer extends StatelessWidget {
           ),
           if (user != null && user!.isAdmin) ...[
             ListTile(
-              leading: Icon(Icons.add),
-              title: Text('Dodaj Kviz'),
+              leading: const Icon(Icons.add),
+              title: const Text('Dodaj Kviz'),
               onTap: () {
                 Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (context) => AddKvizPage(user: user)));
               },
             ),
             ListTile(
-              leading: Icon(Icons.add_location),
-              title: Text('Dodaj Lokaciju'),
+              leading: const Icon(Icons.add_location),
+              title: const Text('Dodaj Lokaciju'),
               onTap: () {
                 Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (context) => CreateLokacijaPage(user: user)));
               },
             ),
             ListTile(
-              leading: Icon(Icons.list),
-              title: Text('Pregled Kvizova'), // Dodata nova stavka u meni
+              leading: const Icon(Icons.list),
+              title: const Text('Pregled Kvizova'), // Dodata nova stavka u meni
               onTap: () {
                 Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (context) => PregledKvizovaPage(user: user!))); // Navigacija na stranicu Pregled Kvizova

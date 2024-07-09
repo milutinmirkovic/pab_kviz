@@ -3,11 +3,9 @@ import 'package:http/http.dart' as http;
 import 'package:pab_kviz/models/lokacija.dart';
 
 class LokacijaService {
+
+
   final String baseUrl = 'https://organizacija-pab-kvizova-default-rtdb.europe-west1.firebasedatabase.app/lokacije';
-
-  
-
-
 
   // Metod za učitavanje svih Lokacija
   Future<List<Lokacija>> getLocations(String token) async {
@@ -19,16 +17,15 @@ class LokacijaService {
         Lokacija lokacija = Lokacija.fromMap(value, key);
         lokacije.add(lokacija);
       });
-      print('Loaded locations: $lokacije'); // Dodato za ispisivanje lokacija
+     
       return lokacije;
     } else {
-      print('Failed to load locations: ${response.reasonPhrase}');
-      throw Exception('Failed to load locations');
+     
+      throw Exception('Lokacije nisu ucitane');
     }
   }
 
-
-
+ // kreiranje lokacije
   Future<void> createLokacija(Lokacija lokacija, String authToken) async {
     final url = Uri.parse('$baseUrl.json?auth=$authToken');
 
@@ -40,14 +37,14 @@ class LokacijaService {
       );
 
       if (response.statusCode == 200) {
-        print('Lokacija created successfully');
+        print('Lokacija uspesno kreirana');
       } else {
-        print('Failed to create lokacija. Error: ${response.reasonPhrase}');
-        // Handle error cases
+        print('Lokacija nije kreirana. Error: ${response.reasonPhrase}');
+       
       }
     } catch (e) {
-      print('Exception occurred while creating lokacija: $e');
-      // Handle exceptions
+      print('Greska prilikom kreiranja lokacije : $e');
+      
     }
   }
 }

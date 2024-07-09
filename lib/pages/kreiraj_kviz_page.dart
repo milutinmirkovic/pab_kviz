@@ -119,7 +119,7 @@ class _AddKvizPageState extends State<AddKvizPage> {
       appBar: Navbar(title: 'Dodaj Kviz', user: widget.user),
       drawer: CustomDrawer(user: widget.user),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
@@ -132,7 +132,7 @@ class _AddKvizPageState extends State<AddKvizPage> {
                     setState(() => naziv = val);
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 DropdownButtonFormField<String>(
                   decoration: textInputDecoration.copyWith(hintText: 'Tip kviza'),
                   items: tipoviKviza.map((KategorijaKviza tip) {
@@ -146,7 +146,7 @@ class _AddKvizPageState extends State<AddKvizPage> {
                   },
                   validator: (val) => val == null ? 'Odaberite tip kviza' : null,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextFormField(
                   decoration: textInputDecoration.copyWith(hintText: 'Vreme'),
                   validator: _validateTime,
@@ -154,7 +154,7 @@ class _AddKvizPageState extends State<AddKvizPage> {
                     setState(() => vreme = val);
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextFormField(
                   decoration: textInputDecoration.copyWith(hintText: 'Datum'),
                   validator: _validateDate,
@@ -162,7 +162,7 @@ class _AddKvizPageState extends State<AddKvizPage> {
                     setState(() => datum = val);
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 TextFormField(
                   decoration: textInputDecoration.copyWith(hintText: 'Cena po igraču'),
                   validator: _validatePrice,
@@ -171,7 +171,7 @@ class _AddKvizPageState extends State<AddKvizPage> {
                     setState(() => cenaPoIgracu = double.parse(val));
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 DropdownButtonFormField<String>(
                   decoration: textInputDecoration.copyWith(hintText: 'Lokacija'),
                   items: lokacije.map((Lokacija lokacija) {
@@ -188,13 +188,13 @@ class _AddKvizPageState extends State<AddKvizPage> {
                   },
                   validator: (val) => val == null ? 'Odaberite lokaciju' : null,
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.orange,
-                    padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                    padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Dodaj Kviz',
                     style: TextStyle(color: Colors.white),
                   ),
@@ -210,9 +210,9 @@ class _AddKvizPageState extends State<AddKvizPage> {
                         brojSlobodnihMesta: brojSlobodnihMesta,
                         ucesca: [],
                       );
-                      await _kvizService.addKviz(newKviz, widget.user!.token!);
+                      await _kvizService.insertKviz(newKviz, widget.user!.token!);
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text('Kviz uspešno dodat'),
                           backgroundColor: Colors.green,
                         ),

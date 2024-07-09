@@ -43,7 +43,7 @@ class Kviz {
       datum: data['datum'],
       cenaPoIgracu: (data['cena_po_igracu'] is int)
         ? (data['cena_po_igracu'] as int).toDouble()
-        : data['cena_po_igracu'],
+        : data['cena_po_igracu'], // bacalo je exception kod pokretanja na telefonu
       lokacijaId: data['lokacija_id'],
       brojSlobodnihMesta: data['broj_slobodnih_mesta'],
       ucesca: List<String>.from(data['ucesca'] ?? []),

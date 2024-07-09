@@ -38,13 +38,13 @@ class _CreateLokacijaPageState extends State<CreateLokacijaPage> {
       appBar: Navbar(title: 'PAB KVIZ 8x8', user: user),
       drawer: CustomDrawer(user: user),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: Column(
             children: [
               TextFormField(
-                decoration: InputDecoration(labelText: 'Adresa'),
+                decoration: const InputDecoration(labelText: 'Adresa'),
                 validator: (value) => value!.isEmpty ? 'Unesite adresu' : null,
                 onChanged: (value) {
                   setState(() {
@@ -53,7 +53,7 @@ class _CreateLokacijaPageState extends State<CreateLokacijaPage> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Kapacitet'),
+                decoration: const InputDecoration(labelText: 'Kapacitet'),
                 validator: (value) => value!.isEmpty ? 'Unesite kapacitet' : null,
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
@@ -63,7 +63,7 @@ class _CreateLokacijaPageState extends State<CreateLokacijaPage> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Naziv'),
+                decoration: const InputDecoration(labelText: 'Naziv'),
                 validator: (value) => value!.isEmpty ? 'Unesite naziv' : null,
                 onChanged: (value) {
                   setState(() {
@@ -72,7 +72,7 @@ class _CreateLokacijaPageState extends State<CreateLokacijaPage> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Opis'),
+                decoration: const InputDecoration(labelText: 'Opis'),
                 validator: (value) => value!.isEmpty ? 'Unesite opis' : null,
                 onChanged: (value) {
                   setState(() {
@@ -81,7 +81,7 @@ class _CreateLokacijaPageState extends State<CreateLokacijaPage> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Slika'),
+                decoration: const InputDecoration(labelText: 'Slika'),
                 validator: (value) => value!.isEmpty ? 'Unesite putanju ka slici' : null,
                 onChanged: (value) {
                   setState(() {
@@ -89,7 +89,7 @@ class _CreateLokacijaPageState extends State<CreateLokacijaPage> {
                   });
                 },
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
@@ -107,18 +107,18 @@ class _CreateLokacijaPageState extends State<CreateLokacijaPage> {
                       );
                       await lokacijaService.createLokacija(newLokacija, authToken);
                        ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
+                        const SnackBar(
                           content: Text('Uspešno ste se prijavili'),
                           backgroundColor: Colors.green,
                         ),
                       );
-                      //Navigator.pop(context); // Go back after creating lokacija
+                     
                     } else {
                       print('Failed to get auth token.');
                     }
                   }
                 },
-                child: Text('Dodajte lokaciju'),
+                child: const Text('Dodajte lokaciju'),
               ),
             ],
           ),
