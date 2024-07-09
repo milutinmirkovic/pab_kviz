@@ -8,8 +8,6 @@ import 'package:pab_kviz/widgets/navbar.dart';
 
 
 class CreateLokacijaPage extends StatefulWidget {
-  @override
-
   final Korisnik? user=Korisnik.getCurrentUser();
   
   _CreateLokacijaPageState createState() => _CreateLokacijaPageState(user: user);
