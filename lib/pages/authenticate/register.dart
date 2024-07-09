@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:pab_kviz/pages/authenticate/sign_in.dart';
+//import 'package:pab_kviz/pages/authenticate/sign_in.dart';
 import 'package:pab_kviz/services/auth.dart';
 import 'package:pab_kviz/shared/constants.dart';
 
@@ -92,10 +92,7 @@ class _RegisterState extends State<Register> {
                                 error = 'Molimo unesite validan email';
                               });
                             }else{
-                              Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => SignIn()),
-                          );
+                              Navigator.pushNamed(context, '/');
                             }
                           }
                         },
@@ -108,10 +105,7 @@ class _RegisterState extends State<Register> {
                       const SizedBox(height: 20),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => SignIn()),
-                          );
+                          Navigator.pushNamed(context, '/');
                         },
                         child: const Text(
                           'Već imate nalog? Prijavite se',

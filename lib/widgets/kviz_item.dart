@@ -96,12 +96,9 @@ class KvizItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         TextButton(
-                          onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => UpdateKvizPage(user: user, kviz: kviz),
-                            ),
-                          ),
+                          onPressed: () => Navigator.pushNamed(context, '/update_kviz',
+                            arguments: {'user': user, 'kviz': kviz},
+                           ),
                           child: const Text('Ažuriraj'),
                         ),
                         TextButton(
@@ -121,12 +118,11 @@ class KvizItem extends StatelessWidget {
                     Center(
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PrijavaPage(user: user, kviz: kviz),
-                            ),
-                          );
+                          Navigator.pushNamed(
+                                context,
+                                '/napravi_prijavu',
+                                arguments: {'user': user, 'kviz': kviz},
+                               );
                         },
                         child: const Text('Prijavi ekipu'),
                       ),

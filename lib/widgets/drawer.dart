@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pab_kviz/models/Korisnik.dart';
-import 'package:pab_kviz/pages/kreiraj_lokaciju.dart';
-import 'package:pab_kviz/pages/lokacije_page.dart';
-import 'package:pab_kviz/pages/kreiraj_kviz_page.dart';
-import 'package:pab_kviz/pages/home/home.dart';
-import 'package:pab_kviz/pages/kvizovi_page.dart';
-import 'package:pab_kviz/pages/pregled_kvizova.dart'; 
+//import 'package:pab_kviz/pages/kreiraj_lokaciju.dart';
+//import 'package:pab_kviz/pages/lokacije_page.dart';
+//import 'package:pab_kviz/pages/kreiraj_kviz_page.dart';
+//import 'package:pab_kviz/pages/home/home.dart';
+//import 'package:pab_kviz/pages/kvizovi_page.dart';
+//import 'package:pab_kviz/pages/pregled_kvizova.dart'; 
 
 class CustomDrawer extends StatelessWidget {
   final Korisnik? user;
@@ -37,24 +37,21 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(Icons.home),
             title: const Text('Početna'),
             onTap: () {
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => Home(user: user!)));
+              Navigator.pushNamed(context, '/home');
             },
           ),
           ListTile(
             leading: const Icon(Icons.quiz),
             title: const Text('Kvizovi'),
             onTap: () {
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => KvizoviPage(user: user!)));
+              Navigator.pushNamed(context, '/tipovi_kvizova');
             },
           ),
           ListTile(
             leading: const Icon(Icons.location_on),
             title: const Text('Lokacije'),
             onTap: () {
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => LokacijePage(user: user)));
+              Navigator.pushNamed(context, '/lokacije');
             },
           ),
           if (user != null && user!.isAdmin) ...[
@@ -62,24 +59,21 @@ class CustomDrawer extends StatelessWidget {
               leading: const Icon(Icons.add),
               title: const Text('Dodaj Kviz'),
               onTap: () {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) => AddKvizPage(user: user)));
+                Navigator.pushNamed(context, '/kreiraj_kviz');
               },
             ),
             ListTile(
               leading: const Icon(Icons.add_location),
               title: const Text('Dodaj Lokaciju'),
               onTap: () {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) => CreateLokacijaPage(user: user)));
+                Navigator.pushNamed(context, '/kreiraj_lokaciju');
               },
             ),
             ListTile(
               leading: const Icon(Icons.list),
               title: const Text('Pregled Kvizova'), 
               onTap: () {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) => PregledKvizovaPage(user: user!))); // Navigacija na stranicu Pregled Kvizova
+                Navigator.pushNamed(context, '/pregled_kvizova');
               },
             ),
           ],

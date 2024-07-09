@@ -48,7 +48,7 @@ class KategorijaItem extends StatelessWidget {
                 kviz: kviz,
                 isAdmin: user.isAdmin,
                 user: user,
-                token: user.token ?? '', // Add token here
+                token: user.token ?? '', 
               ),
           ],
         ),

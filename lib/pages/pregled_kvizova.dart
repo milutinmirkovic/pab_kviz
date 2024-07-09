@@ -7,10 +7,10 @@ import 'package:pab_kviz/widgets/navbar.dart';
 import 'package:pab_kviz/widgets/drawer.dart';
 
 class PregledKvizovaPage extends StatelessWidget {
-  final Korisnik user;
+  final Korisnik? user=Korisnik.getCurrentUser();
   final KvizService kvizService = KvizService();
 
-  PregledKvizovaPage({required this.user});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class PregledKvizovaPage extends StatelessWidget {
       appBar: Navbar(title: 'Pregled Kvizova', user: user),
       drawer: CustomDrawer(user: user),
       body: FutureBuilder<List<Kviz>>(
-        future: kvizService.getKvizovi(user.token!),
+        future: kvizService.getKvizovi(user!.token!),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -31,7 +31,7 @@ class PregledKvizovaPage extends StatelessWidget {
             return ListView.builder(
               itemCount: kvizovi.length,
               itemBuilder: (context, index) {
-                return KvizCard(kviz: kvizovi[index], user: user);
+                return KvizCard(kviz: kvizovi[index], user: user!);
               },
             );
           }

@@ -64,6 +64,7 @@ class AuthService {
         if (response.statusCode == 200) {
           print("sign in/response je vracen");
           final userData = json.decode(response.body) as Map<String, dynamic>;
+          Korisnik.setCurrentUser(userData, token!);
           return Korisnik.fromMap(userData, token!);
         } else {
           print('Failed to load user data: ${response.statusCode} ${response.body}');
@@ -112,6 +113,8 @@ class AuthService {
   // Sign out
   Future signOut() async {
     try {
+      //Korisnik.setCurrentUser(null, null);
+      Korisnik.clearCurrentUser();
       return await _auth.signOut();
     } catch (error) {
       print(error.toString());

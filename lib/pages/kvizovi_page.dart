@@ -9,9 +9,9 @@ import 'package:pab_kviz/widgets/navbar.dart';
 import 'package:pab_kviz/widgets/drawer.dart';
 
 class KvizoviPage extends StatefulWidget {
-  final Korisnik user;
+  final Korisnik? user=Korisnik.getCurrentUser();
 
-  KvizoviPage({required this.user});
+  
 
   @override
   _KvizoviPageState createState() => _KvizoviPageState();
@@ -27,8 +27,8 @@ class _KvizoviPageState extends State<KvizoviPage> {
   @override
   void initState() {
     super.initState();
-    _kategorijeFuture = _kategorijaKvizaService.getKategorije(widget.user.token!);
-    _kvizoviFuture = _kvizService.getKvizovi(widget.user.token!);
+    _kategorijeFuture = _kategorijaKvizaService.getKategorije(widget.user!.token!);
+    _kvizoviFuture = _kvizService.getKvizovi(widget.user!.token!);
   }
 
   @override
@@ -63,7 +63,7 @@ class _KvizoviPageState extends State<KvizoviPage> {
                       return KategorijaItem(
                         kategorija: kategorija,
                         kvizovi: kategorijaKvizovi,
-                        user: widget.user,
+                        user: widget.user!,
                       );
                     }).toList(),
                   );

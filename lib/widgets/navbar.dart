@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pab_kviz/pages/authenticate/sign_in.dart';
-import 'package:pab_kviz/pages/home/home.dart'; // Importujte vašu početnu stranicu
+//import 'package:pab_kviz/pages/authenticate/sign_in.dart';
+//import 'package:pab_kviz/pages/home/home.dart'; 
 import 'package:pab_kviz/services/auth.dart';
 import 'package:pab_kviz/models/Korisnik.dart';
 
@@ -21,10 +21,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => Home(user: user!)),
-              );
+              Navigator.pushNamed(context, '/home');
             },
             child: Image.asset('assets/logo.png', height: 30),
           ),
@@ -39,10 +36,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () async {
             await _auth.signOut();
             // Navigate to SignIn page
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => SignIn()),
-            );
+            Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
           },
         ),
       ],

@@ -8,9 +8,9 @@ import 'package:pab_kviz/widgets/kviz_item.dart';
 
 class Home extends StatelessWidget {
   final KvizService kvizService = KvizService();
-  final Korisnik user;
+  final Korisnik? user = Korisnik.getCurrentUser();
 
-  Home({required this.user});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class Home extends StatelessWidget {
       appBar: Navbar(title: 'PAB KVIZ 8x8', user: user),
       drawer: CustomDrawer(user: user),
       body: FutureBuilder<List<Kviz>>(
-        future: kvizService.getKvizovi(user.token ?? ''),
+        future: kvizService.getKvizovi(user!.token ?? ''),
         builder: (context, snapshot) {
           List<Kviz> kvizovi = snapshot.data ?? [];
           return ListView(
@@ -71,9 +71,9 @@ class Home extends StatelessWidget {
               for (Kviz kviz in kvizovi)
                 KvizItem(
                   kviz: kviz,
-                  isAdmin: user.isAdmin,
-                  user: user,
-                  token: user.token ?? '',
+                  isAdmin: user!.isAdmin,
+                  user: user!,
+                  token: user!.token ?? '',
                 ),
             ],
           );

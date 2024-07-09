@@ -8,7 +8,7 @@ import 'package:pab_kviz/widgets/drawer.dart';
 import 'package:pab_kviz/widgets/navbar.dart';
 
 class PrijavaPage extends StatelessWidget {
-  PrijavaPage({super.key, required this.user, required this.kviz});
+  PrijavaPage({super.key, required this.user,required this.kviz});
   final Korisnik? user;
   final Kviz? kviz;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -19,6 +19,7 @@ class PrijavaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: Navbar(title: 'PAB KVIZ 8x8', user: user),
       drawer: CustomDrawer(user: user),

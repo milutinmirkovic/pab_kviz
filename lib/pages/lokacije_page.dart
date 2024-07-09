@@ -11,9 +11,9 @@ import 'package:pab_kviz/models/Korisnik.dart';
 class LokacijePage extends StatelessWidget {
   final LokacijaService lokacijaService = LokacijaService();
   final KvizService kvizService = KvizService();
-  final Korisnik? user;
+  final Korisnik? user=Korisnik.getCurrentUser();
 
-  LokacijePage({required this.user});
+  
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:pab_kviz/pages/authenticate/register.dart';
-import 'package:pab_kviz/pages/home/home.dart';
+//import 'package:pab_kviz/pages/authenticate/register.dart';
+//import 'package:pab_kviz/pages/home/home.dart';
 import 'package:pab_kviz/services/auth.dart';
 import 'package:pab_kviz/shared/constants.dart';
 
@@ -93,10 +93,7 @@ class _SignInState extends State<SignIn> {
                                 error = 'Neuspešno logovanje';
                               });
                             } else {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(builder: (context) => Home(user: result)),
-                              );
+                              Navigator.pushNamed(context, '/home');
                             }
                           }
                         },
@@ -109,10 +106,7 @@ class _SignInState extends State<SignIn> {
                       const SizedBox(height: 20),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(builder: (context) => Register()),
-                          );
+                           Navigator.pushNamed(context, '/register');
                         },
                         child: const Text(
                           "Nemate nalog? Napravite ga",

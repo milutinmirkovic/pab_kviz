@@ -11,9 +11,9 @@ import 'package:pab_kviz/widgets/navbar.dart';
 import 'package:pab_kviz/widgets/drawer.dart';
 
 class AddKvizPage extends StatefulWidget {
-  final Korisnik? user;
+  final Korisnik? user=Korisnik.getCurrentUser();
 
-  AddKvizPage({required this.user});
+  
 
   @override
   _AddKvizPageState createState() => _AddKvizPageState();
