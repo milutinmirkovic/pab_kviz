@@ -75,7 +75,7 @@ class PrijavaPage extends StatelessWidget {
                     if (_formKey.currentState!.validate()) {
                       Prijava prijava = Prijava(
                         teamName: imeEkipe!,
-                        numPlayers: brojIgraca!,
+                        numPlayers: brojIgraca!.toDouble(),
                         emailUser: user!.email!,
                         idKviza: kviz!.id!,
                         kotizacija: brojIgraca! * kviz!.cenaPoIgracu,

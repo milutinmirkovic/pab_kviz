@@ -85,6 +85,7 @@ class KvizService {
 
   // Dobijanje prijava za kviz
   Future<List<Prijava>> getPrijaveZaKviz(String kvizId, String token) async {
+  try {
     final response = await http.get(Uri.parse('$prijaveUrl.json?auth=$token'));
     if (response.statusCode == 200) {
       Map<String, dynamic>? data = json.decode(response.body);
@@ -94,22 +95,19 @@ class KvizService {
       List<Prijava> prijave = [];
       data.forEach((key, value) {
         if (value['idKviza'] == kvizId) {
-          Prijava prijava = Prijava(
-            id: key,
-            teamName: value['teamName'],
-            numPlayers: value['numPlayers'],
-            emailUser: value['emailUser'],
-            idKviza: value['idKviza'],
-            kotizacija: value['kotizacija'],
-          );
+          Prijava prijava = Prijava.fromMap(key, value);
           prijave.add(prijava);
         }
       });
       return prijave;
     } else {
-      throw Exception('Neuspešno učitavanje prijava');
+      throw Exception('Neuspešno učitavanje prijava: ${response.statusCode} ${response.body}');
     }
+  } catch (e) {
+    print('Greška prilikom učitavanja prijava: $e');
+    throw Exception('Greška prilikom učitavanja prijava: $e');
   }
+}
 
   // Brisanje prijave
   Future<bool> deletePrijava(String prijavaId, String token) async {
