@@ -29,16 +29,16 @@ class KvizItem extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Potvrda'),
-          content: Text('Da li ste sigurni da želite da obrišete ovaj kviz?'),
+          title: const Text('Potvrda'),
+          content: const Text('Da li ste sigurni da želite da obrišete ovaj kviz?'),
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.of(context).pop(false),
-              child: Text('Ne'),
+              child: const Text('Ne'),
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: Text('Da'),
+              child: const Text('Da'),
             ),
           ],
         );
@@ -53,9 +53,9 @@ class KvizItem extends StatelessWidget {
     KvizService service = KvizService();
     try {
       await service.deleteKviz(kviz.id!, token);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Kviz obrisan uspešno!')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Kviz obrisan uspešno!')));
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Greška pri brisanju kviza!')));
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Greška pri brisanju kviza!')));
     }
   }
 
@@ -65,32 +65,32 @@ class KvizItem extends StatelessWidget {
       future: _fetchLokacija(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else if (!snapshot.hasData) {
-          return Center(child: Text('Lokacija nije pronađena'));
+          return const Center(child: Text('Lokacija nije pronađena'));
         } else {
           Lokacija lokacija = snapshot.data!;
           return Card(
-            margin: EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
             child: Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     kviz.naziv,
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text('Datum: ${kviz.datum}'),
                   Text('Vreme: ${kviz.vreme}'),
                   Text('Cena po igraču: ${kviz.cenaPoIgracu} RSD'),
                   Text('Slobodna mesta: ${kviz.brojSlobodnihMesta}'),
                   Text('Naziv lokala: ${lokacija.naziv}'),
                   Text('Adresa: ${lokacija.adresa}'),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   if (isAdmin) ...[
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -102,16 +102,16 @@ class KvizItem extends StatelessWidget {
                               builder: (context) => UpdateKvizPage(user: user, kviz: kviz),
                             ),
                           ),
-                          child: Text('Ažuriraj'),
+                          child: const Text('Ažuriraj'),
                         ),
                         TextButton(
                           onPressed: () => _confirmDelete(context),
-                          child: Text('Obriši'),
+                          child: const Text('Obriši'),
                         ),
                       ],
                     ),
                   ] else if (kviz.brojSlobodnihMesta == 0) ...[
-                    Center(
+                    const Center(
                       child: Text(
                         'Popunjen',
                         style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
@@ -128,7 +128,7 @@ class KvizItem extends StatelessWidget {
                             ),
                           );
                         },
-                        child: Text('Prijavi ekipu'),
+                        child: const Text('Prijavi ekipu'),
                       ),
                     ),
                   ],

@@ -13,7 +13,7 @@ class LokacijaItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('Prikazujem lokaciju: ${lokacija.naziv}'); // Debug print za nazive lokacija
+ 
     return Card(
       margin: const EdgeInsets.all(10),
       child: Padding(
@@ -23,12 +23,12 @@ class LokacijaItem extends StatelessWidget {
           children: [
             if ( lokacija.slika.isNotEmpty)
               Image.asset(
-                'assets/${lokacija.slika}', // Assuming lokacija.slika holds the image filename
+                'assets/${lokacija.slika}', 
                 width: double.infinity,
                 height: 400,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
-                  return const SizedBox.shrink(); // If image fails to load, show nothing
+                  return const SizedBox.shrink(); 
                 },
               ),
             const SizedBox(height: 10),

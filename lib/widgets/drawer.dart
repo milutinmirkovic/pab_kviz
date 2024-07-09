@@ -5,11 +5,11 @@ import 'package:pab_kviz/pages/lokacije_page.dart';
 import 'package:pab_kviz/pages/kreiraj_kviz_page.dart';
 import 'package:pab_kviz/pages/home/home.dart';
 import 'package:pab_kviz/pages/kvizovi_page.dart';
-import 'package:pab_kviz/pages/pregled_kvizova.dart'; // Import ispravno
+import 'package:pab_kviz/pages/pregled_kvizova.dart'; 
 
 class CustomDrawer extends StatelessWidget {
   final Korisnik? user;
-  CustomDrawer({required this.user});
+  const CustomDrawer({required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +76,7 @@ class CustomDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.list),
-              title: const Text('Pregled Kvizova'), // Dodata nova stavka u meni
+              title: const Text('Pregled Kvizova'), 
               onTap: () {
                 Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (context) => PregledKvizovaPage(user: user!))); // Navigacija na stranicu Pregled Kvizova

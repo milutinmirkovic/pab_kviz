@@ -79,19 +79,20 @@ class KvizCard extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Broj prijavljenih ekipa: ${prijave.length}'),
-                      Text('Broj preostalih mesta: ${kviz.brojSlobodnihMesta}'),
-                      Text('Prihod od kotizacija: ${prijave.fold(0.0, (total, prijava) => total + prijava.kotizacija)} RSD'),
-                      Text('Ukupno ljudi: ${prijave.fold(0, (total, prijava) => total + prijava.numPlayers)}'),
+                     Text('Broj prijavljenih ekipa: ${prijave.length.toDouble()}'),
+                     Text('Broj preostalih mesta: ${kviz.brojSlobodnihMesta.toDouble()}'),
+                     Text('Prihod od kotizacija: ${prijave.fold(0.0, (total, prijava) => total + prijava.kotizacija).toDouble()} RSD'),
+                     Text('Ukupno ljudi: ${prijave.fold(0.0, (total, prijava) => total + prijava.numPlayers).toDouble()}'),
                       const Divider(),
+                      
                       ...prijave.map((prijava) {
-                        return ListTile(
+                       return ListTile(
                           title: Text(prijava.teamName),
                           subtitle: Text(prijava.emailUser),
                           trailing: IconButton(
                             icon: const Icon(Icons.delete),
                             onPressed: () async {
-                              bool success = await kvizService.deletePrijava(prijava.id!, user.token!);
+                             bool success = await kvizService.deletePrijava(prijava.id!, user.token!);
                               if (success) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
@@ -99,6 +100,7 @@ class KvizCard extends StatelessWidget {
                                     backgroundColor: Colors.green,
                                   ),
                                 );
+                                
                                 await kvizService.updateMesta(kviz.id!, kviz.brojSlobodnihMesta + 2, user.token!);
                                 (context as Element).reassemble();
                               } else {
@@ -112,7 +114,7 @@ class KvizCard extends StatelessWidget {
                             },
                           ),
                         );
-                      }).toList(),
+                      }),
                     ],
                   );
                 }
