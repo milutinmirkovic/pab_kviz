@@ -35,7 +35,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
           label: const Text('Logout'),
           onPressed: () async {
             await _auth.signOut();
-            // Navigate to SignIn page
+            
             Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
           },
         ),

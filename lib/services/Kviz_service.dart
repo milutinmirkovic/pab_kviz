@@ -5,6 +5,8 @@ import 'package:pab_kviz/models/kviz.dart';
 import 'package:pab_kviz/models/PrijavaModel.dart';
 
 class KvizService {
+
+  
   final String baseUrl = 'https://organizacija-pab-kvizova-default-rtdb.europe-west1.firebasedatabase.app/kvizovi';
   final String prijaveUrl = 'https://organizacija-pab-kvizova-default-rtdb.europe-west1.firebasedatabase.app/prijave';
   final String lokacijeUrl = 'https://organizacija-pab-kvizova-default-rtdb.europe-west1.firebasedatabase.app/lokacije';

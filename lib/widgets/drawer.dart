@@ -54,7 +54,7 @@ class CustomDrawer extends StatelessWidget {
               Navigator.pushNamed(context, '/lokacije');
             },
           ),
-          if (user != null && user!.isAdmin) ...[
+          if (user != null && user!.isAdmin) ...[ //ako je uslov tacan, dodaj u listu sledece, nakon tackica
             ListTile(
               leading: const Icon(Icons.add),
               title: const Text('Dodaj Kviz'),

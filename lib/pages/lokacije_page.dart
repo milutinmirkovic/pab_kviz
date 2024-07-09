@@ -34,12 +34,15 @@ class LokacijePage extends StatelessWidget {
             } else {
               List<Lokacija> lokacije = snapshot.data![0] as List<Lokacija>;
               List<Kviz> kvizovi = snapshot.data![1] as List<Kviz>;
-              print('Loaded locations: ${lokacije.map((l) => l.naziv).toList()}');
-              print('Loaded quizzes: ${kvizovi.map((k) => k.naziv).toList()}');
+              
               return ListView(
+
                 children: lokacije.map((lokacija) {
+
                   List<Kviz> lokacijaKvizovi = kvizovi.where((kviz) => kviz.lokacijaId == lokacija.id).toList();
+
                   return LokacijaItem(user: user!, lokacija: lokacija, kvizovi: lokacijaKvizovi);
+                  
                 }).toList(),
               );
             }

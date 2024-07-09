@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pab_kviz/models/Korisnik.dart';
 import 'package:pab_kviz/models/Lokacija.dart';
 import 'package:pab_kviz/models/kviz.dart';
-import 'package:pab_kviz/pages/prijava.dart';
-import 'package:pab_kviz/pages/update_kviz_page.dart';
 import 'package:pab_kviz/services/kviz_service.dart';
 
 class KvizItem extends StatelessWidget {

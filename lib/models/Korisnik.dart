@@ -5,13 +5,13 @@ class Korisnik {
   final bool isAdmin;
   final String? token;
 
-  // Private constructor
+  
   Korisnik._internal({required this.email, required this.isAdmin, required this.token});
 
-  // Singleton instance
+ 
   static Korisnik? _instance;
 
-  // Factory constructor
+  
   factory Korisnik({required String? email, required bool isAdmin, required String? token}) {
     return _instance ??= Korisnik._internal(email: email, isAdmin: isAdmin, token: token);
   }

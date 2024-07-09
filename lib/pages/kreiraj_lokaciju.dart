@@ -30,8 +30,8 @@ class _CreateLokacijaPageState extends State<CreateLokacijaPage> {
 
   @override
   Widget build(BuildContext context) {
-    final String? authToken = user!.token;
-   // print(authToken);
+    
+  
     return Scaffold(
       appBar: Navbar(title: 'PAB KVIZ 8x8', user: user),
       drawer: CustomDrawer(user: user),
@@ -91,7 +91,7 @@ class _CreateLokacijaPageState extends State<CreateLokacijaPage> {
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
-                    // Get the auth token
+                  
                     
                     String? authToken = Korisnik.getCurrentUser()!.token;
 

@@ -92,6 +92,7 @@ class _RegisterState extends State<Register> {
                                 error = 'Molimo unesite validan email';
                               });
                             }else{
+                              
                               Navigator.pushNamed(context, '/');
                             }
                           }

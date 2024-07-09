@@ -22,7 +22,7 @@ class KategorijaItem extends StatelessWidget {
           children: [
             Center(
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
+                borderRadius: BorderRadius.circular(30.0),
                 child: Image.asset(
                   'assets/${kategorija.slika}',
                   width: 350,
