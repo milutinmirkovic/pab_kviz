@@ -79,14 +79,13 @@ class KvizCard extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                     Text('Broj prijavljenih ekipa: ${prijave.length.toDouble()}'),
-                     Text('Broj preostalih mesta: ${kviz.brojSlobodnihMesta.toDouble()}'),
+                     Text('Broj prijavljenih ekipa: ${prijave.length}'),
+                     Text('Broj preostalih mesta: ${kviz.brojSlobodnihMesta}'),
                      Text('Prihod od kotizacija: ${prijave.fold(0.0, (total, prijava) => total + prijava.kotizacija).toDouble()} RSD'),
-                     Text('Ukupno ljudi: ${prijave.fold(0.0, (total, prijava) => total + prijava.numPlayers).toDouble()}'),
+                     Text('Ukupno ljudi: ${prijave.fold(0.0, (total, prijava) => total + prijava.numPlayers).toInt()}'),
                       const Divider(),
-                      
                       ...prijave.map((prijava) {
-                       return ListTile(
+                        return ListTile(
                           title: Text(prijava.teamName),
                           subtitle: Text(prijava.emailUser),
                           trailing: IconButton(
