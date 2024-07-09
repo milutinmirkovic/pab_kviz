@@ -108,10 +108,12 @@ class _CreateLokacijaPageState extends State<CreateLokacijaPage> {
                       await lokacijaService.createLokacija(newLokacija, authToken);
                        ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Uspešno ste se prijavili'),
+                          content: Text('Uspešno ste napravili lokaciju'),
                           backgroundColor: Colors.green,
                         ),
                       );
+
+                      Navigator.pushNamed(context, '/home');
                      
                     } else {
                       print('Failed to get auth token.');
