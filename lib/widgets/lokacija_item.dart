@@ -13,6 +13,7 @@ class LokacijaItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('Prikazujem lokaciju: ${lokacija.naziv}'); // Debug print za nazive lokacija
     return Card(
       margin: EdgeInsets.all(10),
       child: Padding(
@@ -44,6 +45,8 @@ class LokacijaItem extends StatelessWidget {
               'Kvizovi na ovoj lokaciji:',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
+            if (kvizovi.isEmpty)
+              Text('Nema predstojećih kvizova'),
             for (Kviz kviz in kvizovi)
               KvizItem(
                 kviz: kviz,

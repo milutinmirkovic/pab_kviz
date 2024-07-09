@@ -25,7 +25,7 @@ class PregledKvizovaPage extends StatelessWidget {
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No quizzes found'));
+            return Center(child: Text('Kvizovi nisu pronađeni'));
           } else {
             List<Kviz> kvizovi = snapshot.data!;
             return ListView.builder(
@@ -73,7 +73,7 @@ class KvizCard extends StatelessWidget {
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return Center(child: Text('No prijave found'));
+                  return Center(child: Text('Prijave nisu pronađene'));
                 } else {
                   List<Prijava> prijave = snapshot.data!;
                   return Column(
@@ -91,9 +91,24 @@ class KvizCard extends StatelessWidget {
                           trailing: IconButton(
                             icon: Icon(Icons.delete),
                             onPressed: () async {
-                              await kvizService.deletePrijava(prijava.idKviza, user.token!);
-                              await kvizService.updateMesta(kviz.id!, kviz.brojSlobodnihMesta + 1, user.token!);
-                              (context as Element).reassemble();
+                              bool success = await kvizService.deletePrijava(prijava.id!, user.token!);
+                              if (success) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Prijava uspešno obrisana'),
+                                    backgroundColor: Colors.green,
+                                  ),
+                                );
+                                await kvizService.updateMesta(kviz.id!, kviz.brojSlobodnihMesta + 1, user.token!);
+                                (context as Element).reassemble();
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Brisanje prijave nije uspelo'),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              }
                             },
                           ),
                         );

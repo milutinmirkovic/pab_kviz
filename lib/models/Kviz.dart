@@ -1,15 +1,13 @@
-import 'dart:convert';
-
 class Kviz {
-  String? id;
-  String naziv;
-  String tip;
-  String vreme;
-  String datum;
-  double cenaPoIgracu;
-  String lokacijaId;
-  int brojSlobodnihMesta;
-  List<String> ucesca;
+  final String? id;
+  final String naziv;
+  final String tip;
+  final String vreme;
+  final String datum;
+  final double cenaPoIgracu;
+  final String lokacijaId;
+  final int brojSlobodnihMesta;
+  final List<String> ucesca;
 
   Kviz({
     this.id,
@@ -23,24 +21,7 @@ class Kviz {
     required this.ucesca,
   });
 
-  // Factory konstruktor za kreiranje instance Kviz iz mape
-  factory Kviz.fromMap(Map<String, dynamic> data, String documentId) {
-    return Kviz(
-      id: documentId.isEmpty ? null : documentId,
-      naziv: data['naziv'],
-      tip: data['tip'],
-      vreme: data['vreme'],
-      datum: data['datum'],
-      cenaPoIgracu: data['cena_po_igracu'],
-      lokacijaId: data['lokacija_id'],
-    brojSlobodnihMesta: data['broj_slobodnih_mesta'],
-    
-      ucesca: List<String>.from(data['ucesca'] ?? []),
-    );
-  }
-
-  // Metoda za konvertovanje instance Kviz u mapu
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
       'naziv': naziv,
       'tip': tip,
@@ -53,9 +34,17 @@ class Kviz {
     };
   }
 
-  // Metoda za konvertovanje instance Kviz u JSON string
-  String toJson() => json.encode(toMap());
-
-  // Factory konstruktor za kreiranje instance Kviz iz JSON stringa
-  factory Kviz.fromJson(String source) => Kviz.fromMap(json.decode(source), "");
+  factory Kviz.fromMap(Map<String, dynamic> data, String documentId) {
+    return Kviz(
+      id: documentId,
+      naziv: data['naziv'],
+      tip: data['tip'],
+      vreme: data['vreme'],
+      datum: data['datum'],
+      cenaPoIgracu: data['cena_po_igracu'],
+      lokacijaId: data['lokacija_id'],
+      brojSlobodnihMesta: data['broj_slobodnih_mesta'],
+      ucesca: List<String>.from(data['ucesca'] ?? []),
+    );
+  }
 }

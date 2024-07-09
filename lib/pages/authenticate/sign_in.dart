@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
+
 import 'package:pab_kviz/pages/authenticate/register.dart';
 import 'package:pab_kviz/pages/home/home.dart';
 import 'package:pab_kviz/services/auth.dart';

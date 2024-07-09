@@ -26,21 +26,25 @@ class LokacijePage extends StatelessWidget {
           kvizService.getKvizovi(user!.token ?? ''),
         ]),
         builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No data found'));
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              return Center(child: Text('Greška: ${snapshot.error}'));
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return Center(child: Text('Nema podataka'));
+            } else {
+              List<Lokacija> lokacije = snapshot.data![0] as List<Lokacija>;
+              List<Kviz> kvizovi = snapshot.data![1] as List<Kviz>;
+              print('Loaded locations: ${lokacije.map((l) => l.naziv).toList()}');
+              print('Loaded quizzes: ${kvizovi.map((k) => k.naziv).toList()}');
+              return ListView(
+                children: lokacije.map((lokacija) {
+                  List<Kviz> lokacijaKvizovi = kvizovi.where((kviz) => kviz.lokacijaId == lokacija.id).toList();
+                  return LokacijaItem(user: user!, lokacija: lokacija, kvizovi: lokacijaKvizovi);
+                }).toList(),
+              );
+            }
           } else {
-            List<Lokacija> lokacije = snapshot.data![0];
-            List<Kviz> kvizovi = snapshot.data![1];
-            return ListView(
-              children: lokacije.map((lokacija) {
-                List<Kviz> lokacijaKvizovi = kvizovi.where((kviz) => kviz.lokacijaId == lokacija.id).toList();
-                return LokacijaItem(user:user!,lokacija:  lokacija, kvizovi: lokacijaKvizovi);
-              }).toList(),
-            );
+            return Center(child: CircularProgressIndicator());
           }
         },
       ),

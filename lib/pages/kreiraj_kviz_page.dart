@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:pab_kviz/models/Korisnik.dart';
 import 'package:pab_kviz/models/kviz.dart';
@@ -53,7 +52,9 @@ class _AddKvizPageState extends State<AddKvizPage> {
           lokacije = loadedLokacije;
         });
       } catch (e) {
-        print("Error loading locations: $e");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Greška prilikom učitavanja lokacija: $e")),
+        );
       }
     }
   }
@@ -66,11 +67,14 @@ class _AddKvizPageState extends State<AddKvizPage> {
           tipoviKviza = loadedTipoviKviza;
         });
       } catch (e) {
-        print("Error loading quiz types: $e");
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Greška prilikom učitavanja tipova kviza: $e")),
+        );
       }
     }
   }
-String? _validateDate(String? value) {
+
+  String? _validateDate(String? value) {
     if (value == null || value.isEmpty) {
       return 'Unesite datum kviza';
     }

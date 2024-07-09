@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pab_kviz/models/Korisnik.dart';
 import 'package:pab_kviz/models/PrijavaModel.dart';
 import 'package:pab_kviz/models/kviz.dart';
+import 'package:pab_kviz/services/Kviz_service.dart';
 import 'package:pab_kviz/services/prijava_service.dart';
-import 'package:pab_kviz/services/kviz_service.dart';
 import 'package:pab_kviz/widgets/drawer.dart';
 import 'package:pab_kviz/widgets/navbar.dart';
 
@@ -81,7 +81,7 @@ class PrijavaPage extends StatelessWidget {
                         kotizacija: brojIgraca! * kviz!.cenaPoIgracu,
                       );
                       await prijavaService.createPrijava(prijava, user!.token!);
-                      await kvizService.updateMesta(kviz!.id!, kviz!.brojSlobodnihMesta - 1, user!.token!);
+                      await kvizService.updateMesta(kviz!.id!, kviz!.brojSlobodnihMesta, user!.token!);
                       
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

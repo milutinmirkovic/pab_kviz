@@ -1,4 +1,5 @@
 class Prijava {
+  String? id; // Dodato polje id
   final String teamName;
   final int numPlayers;
   final String emailUser;
@@ -6,6 +7,7 @@ class Prijava {
   final double kotizacija;
 
   Prijava({
+    this.id,
     required this.teamName,
     required this.numPlayers,
     required this.emailUser,
@@ -21,5 +23,16 @@ class Prijava {
       'idKviza': idKviza,
       'kotizacija': kotizacija,
     };
+  }
+
+  factory Prijava.fromJson(String id, Map<String, dynamic> json) {
+    return Prijava(
+      id: id,
+      teamName: json['teamName'],
+      numPlayers: json['numPlayers'],
+      emailUser: json['emailUser'],
+      idKviza: json['idKviza'],
+      kotizacija: json['kotizacija'],
+    );
   }
 }
